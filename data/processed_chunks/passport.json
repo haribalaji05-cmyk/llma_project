@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Passport Application Process in India — Overview",
+    "text": "Passport Application Process in India — Overview\n\nPassport services in India are managed by the Ministry of External Affairs through the Passport Seva Programme. Citizens can apply for a fresh passport, renewal, or reissue of a lost or damaged passport. Applications must be submitted through the official Passport Seva portal at passportindia.gov.in.\n\nStep 1 — Register on the Passport Seva portal. Create an account using a valid email address and mobile number.\nStep 2 — Fill the online application form (Form SP-1 for a normal passport or Form SP-2 for a diplomatic passport).\nStep 3 — Pay the applicable fee online using net banking, debit card, or credit card.\nStep 4 — Schedule an appointment at the nearest Passport Seva Kendra (PSK) or Post Office Passport Seva Kendra (POPSK).\nStep 5 — Visit the PSK on the appointment date carrying originals and self-attested photocopies of all required documents.\nStep 6 — Biometric data (photograph and fingerprints) will be collected at the PSK.\nStep 7 — Application is forwarded to the Regional Passport Office (RPO) for police verification and final processing.\nStep 8 — Passport is dispatched to the registered address via Speed Post once approved.\n\nOfficial portal: https://www.passportindia.gov.in\nHelpline: 1800-258-1800 (toll-free)",
+    "service": "passport",
+    "state": "national",
+    "topic": "documents",
+    "source_url": "https://www.passportindia.gov.in",
+    "source_name": "passport.json"
+  },
+  {
+    "title": "Passport Application — Required Documents",
+    "text": "Passport Application — Required Documents\n\nAll applicants must carry original documents along with one self-attested photocopy at the time of the PSK appointment.\n\nProof of Date of Birth (any one):\n- Birth certificate issued by the Municipal Authority or Registrar of Births and Deaths\n- Transfer/School leaving certificate from the last school attended\n- Matriculation certificate\n- PAN card (for adults)\n- Aadhaar card\n\nProof of Address (any one):\n- Aadhaar card\n- Voter ID card\n- Water / Electricity / Telephone (postpaid) bill (not older than 3 months)\n- Registered rent/lease agreement\n- Bank/Post Office account passbook with current address\n- Income tax assessment order\n\nProof of Identity (any one):\n- Aadhaar card / e-Aadhaar\n- Voter ID card\n- PAN card\n- Driving licence\n\nFor Minors — additional documents:\n- Birth certificate is mandatory\n- Passport copy and Aadhaar of parent/guardian\n- Declaration by parent(s) in Annexure H if parents are separated or divorced\n\nFor Government Employees:\n- Identity certificate issued by the employer (Annexure B)\n- No-objection certificate from the department concerned",
+    "service": "passport",
+    "state": "national",
+    "topic": "documents",
+    "source_url": "",
+    "source_name": "passport.json"
+  },
+  {
+    "title": "Passport Application — Fee Structure (Normal and Tatkal)",
+    "text": "Passport Application — Fee Structure (Normal and Tatkal)\n\nNormal Passport Fees (as of 2024 — verify on official portal before applying):\n\n36-page Passport (valid 10 years for adults, 5 years for minors below 18):\n- Fresh / Renewal:         Rs. 1,500\n- Lost / Damaged passport: Rs. 3,000\n\n60-page Passport (valid 10 years):\n- Fresh / Renewal:         Rs. 2,000\n- Lost / Damaged passport: Rs. 3,500\n\nFor Minors (below 18 years):\n- Fresh / Renewal:         Rs. 1,000\n\nTatkal (Urgent) Additional Fee:\n- 36-page Tatkal: Rs. 2,000 extra (Total Rs. 3,500)\n- 60-page Tatkal: Rs. 2,000 extra (Total Rs. 4,000)\n- Lost / Damaged Tatkal: additional Rs. 2,000\n\nPolice Clearance Certificate (PCC): Rs. 500\n\nNote: Fees can be paid online at the time of appointment booking. No cash is accepted at PSK counters. Fee once paid is non-refundable if the applicant is found ineligible. Always verify the latest fees on the official portal: https://www.passportindia.gov.in",
+    "service": "passport",
+    "state": "national",
+    "topic": "fees",
+    "source_url": "https://www.passportindia.gov.in",
+    "source_name": "passport.json"
+  },
+  {
+    "title": "Passport Application — Processing Time and Timelines",
+    "text": "Passport Application — Processing Time and Timelines\n\nNormal (Ordinary) Passport:\n- Processing time is typically 30 to 45 working days from the date of application, subject to police verification completion and RPO workload.\n- After successful police verification and document check at the RPO, the passport is printed and dispatched via India Post Speed Post.\n- Applicants receive SMS and email updates at each stage: application received, police verification scheduled, police verification done, passport dispatched, and delivered.\n\nTatkal (Urgent) Passport:\n- Tatkal applications are processed within 1 to 3 working days at the PSK level.\n- Post-police verification, final dispatch generally takes 7 to 14 working days.\n- Tatkal requires submission of additional supporting documents to justify urgency (e.g., medical emergency, employment abroad).\n\nTracking Your Application:\n- Applicants can track passport status at: https://www.passportindia.gov.in\n- Track using the File Reference Number (FRN) received on the appointment receipt.\n- SMS alerts are sent at each stage to the registered mobile number.\n\nHelpline: 1800-258-1800 (toll-free, available Monday to Friday, 8 AM to 10 PM)",
+    "service": "passport",
+    "state": "national",
+    "topic": "processing_time",
+    "source_url": "https://www.passportindia.gov.in",
+    "source_name": "passport.json"
+  },
+  {
+    "title": "Passport Application — Frequently Asked Questions (FAQs)",
+    "text": "Passport Application — Frequently Asked Questions (FAQs)\n\nQ: Can I apply for a passport without an Aadhaar card?\nA: Yes. Aadhaar is not mandatory but is accepted as proof of identity and address. Other valid documents can be submitted.\n\nQ: Is police verification required for all passport applications?\nA: Police verification is required for most first-time (fresh) applications. For renewal of passports with no change in personal information, post-verification (after dispatch) may apply.\n\nQ: Can a minor apply for a passport independently?\nA: No. A minor's passport application must be submitted by a parent or legal guardian. Both parents must provide consent (Annexure H if one parent is absent or estranged).\n\nQ: What is the validity of a minor's passport?\nA: A passport issued to a minor below 18 years is valid for 5 years or until the minor turns 18, whichever is earlier.\n\nQ: Can I use the passport as address proof for other documents?\nA: Yes. A passport is accepted as a valid proof of identity and address by most government agencies in India.\n\nQ: What should I do if my passport is lost or stolen?\nA: File an FIR with the local police immediately and obtain a copy. Then apply for reissue on the Passport Seva portal with the FIR copy and Annexure F.\n\nSource: https://www.passportindia.gov.in",
+    "service": "passport",
+    "state": "national",
+    "topic": "documents",
+    "source_url": "https://www.passportindia.gov.in",
+    "source_name": "passport.json"
+  }
+]

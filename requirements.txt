@@ -1,0 +1,11 @@
+fastapi==0.111.1
+uvicorn[standard]==0.23.2
+sentence-transformers==2.7.0
+transformers==4.39.3
+torch==2.2.2
+langdetect==1.0.9
+pydantic==2.10.6
+requests==2.31.0
+numpy==1.26.4
+accelerate==1.0.1
+beautifulsoup4==4.12.3

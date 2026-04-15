@@ -1,0 +1,114 @@
+{
+  "national": {
+    "passport": [
+      {
+        "label": "Passport Seva Home",
+        "url": "https://www.passportindia.gov.in/AppOnlineProject/welcomeLink"
+      },
+      {
+        "label": "Passport Document Advisor",
+        "url": "https://www.passportindia.gov.in/AppOnlineProject/docAdvisor/attachmentAdvisorInInit"
+      },
+      {
+        "label": "Passport FAQs",
+        "url": "https://www.passportindia.gov.in/AppOnlineProject/online/faqLink"
+      }
+    ],
+    "aadhaar": [
+      {
+        "label": "UIDAI About Aadhaar",
+        "url": "https://uidai.gov.in/en/my-aadhaar/about-your-aadhaar.html"
+      },
+      {
+        "label": "UIDAI Get Aadhaar",
+        "url": "https://uidai.gov.in/en/my-aadhaar/get-aadhaar.html"
+      },
+      {
+        "label": "UIDAI Update Aadhaar",
+        "url": "https://uidai.gov.in/en/my-aadhaar/update-aadhaar.html"
+      }
+    ],
+    "pf": [
+      {
+        "label": "EPFO For Employees",
+        "url": "https://www.epfindia.gov.in/site_en/For_Employees.php"
+      },
+      {
+        "label": "EPFO FAQ",
+        "url": "https://www.epfindia.gov.in/site_en/FAQ.php"
+      },
+      {
+        "label": "EPFO PF Withdrawal",
+        "url": "https://www.epfindia.gov.in/site_en/PF_Withdrawl.php"
+      }
+    ]
+  },
+  "states": {
+    "karnataka": [
+      {
+        "label": "Seva Sindhu",
+        "url": "https://www.sevasindhu.karnataka.gov.in"
+      }
+    ],
+    "tamil_nadu": [
+      {
+        "label": "TN eSevai",
+        "url": "https://www.tnesevai.tn.gov.in"
+      }
+    ],
+    "maharashtra": [
+      {
+        "label": "Aaple Sarkar",
+        "url": "https://aaplesarkar.mahaonline.gov.in"
+      }
+    ],
+    "uttar_pradesh": [
+      {
+        "label": "eSathi",
+        "url": "https://esathi.up.gov.in"
+      }
+    ],
+    "haryana": [
+      {
+        "label": "SARAL Haryana",
+        "url": "https://saralharyana.gov.in"
+      }
+    ],
+    "gujarat": [
+      {
+        "label": "Digital Gujarat",
+        "url": "https://www.digitalgujarat.gov.in"
+      }
+    ],
+    "rajasthan": [
+      {
+        "label": "eMitra",
+        "url": "https://emitra.rajasthan.gov.in"
+      }
+    ],
+    "telangana": [
+      {
+        "label": "MeeSeva Telangana",
+        "url": "https://www.meeseva.telangana.gov.in"
+      }
+    ],
+    "kerala": [
+      {
+        "label": "eDistrict Kerala",
+        "url": "https://edistrict.kerala.gov.in"
+      }
+    ],
+    "bihar": [
+      {
+        "label": "RTPS Bihar",
+        "url": "https://serviceonline.bihar.gov.in"
+      }
+    ],
+    "odisha": [
+      {
+        "label": "eDistrict Odisha",
+        "url": "https://edistrict.odisha.gov.in"
+      }
+    ]
+  }
+}

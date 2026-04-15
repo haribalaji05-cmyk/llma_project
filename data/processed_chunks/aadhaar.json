@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Aadhaar — Overview and Importance",
+    "text": "Aadhaar — Overview and Importance\n\nAadhaar is a 12-digit unique identification number issued by the Unique Identification Authority of India (UIDAI) to residents of India. It serves as proof of identity and proof of address for all Indian residents, regardless of age or gender.\n\nAadhaar captures biometric data (fingerprints and iris scans) and demographic data (name, date of birth, gender, address, mobile number, and email). It is used for:\n- Direct Benefit Transfer (DBT) of subsidies and welfare benefits\n- Filing income tax returns\n- Opening bank accounts (via eKYC)\n- SIM card activation\n- Government scheme enrolment (ration card, MGNREGA, PM-KISAN, etc.)\n- PAN-Aadhaar linking (mandatory for income tax purposes)\n\nAadhaar is voluntary as per the Supreme Court of India judgment (2018), but is required for availing specific government benefits and subsidies. UIDAI is the statutory authority constituted under the Aadhaar Act, 2016.\n\nOfficial website: https://uidai.gov.in\nHelpline: 1947 (toll-free)",
+    "service": "aadhaar",
+    "state": "national",
+    "topic": "documents",
+    "source_url": "https://uidai.gov.in",
+    "source_name": "aadhaar.json"
+  },
+  {
+    "title": "Aadhaar Enrolment — Step-by-Step Process",
+    "text": "Aadhaar Enrolment — Step-by-Step Process\n\nWho can enrol: Any resident of India, including children (even newborns — Baal Aadhaar is issued with blue colour for children below 5 years).\n\nStep 1 — Locate a nearby Aadhaar Enrolment Centre using the UIDAI website: https://uidai.gov.in or the mAadhaar app.\n\nStep 2 — Visit the enrolment centre without an appointment (walk-in). Carry original documents for identity proof and address proof.\n\nStep 3 — Fill the Aadhaar Enrolment / Correction Form at the centre. Centre operators will assist.\n\nStep 4 — Submit biometric data:\n- Photograph\n- Ten fingerprints\n- Iris scan\n(Children below 5 years are exempt from biometrics; re-enrolment is required at age 5 and 15.)\n\nStep 5 — Receive an Acknowledgement Slip with a 14-digit Enrolment ID (EID). This is used for tracking status.\n\nStep 6 — Aadhaar is generated within 90 days and sent to the registered address via post. It can also be downloaded from the UIDAI portal using the EID.\n\nEnrolment is FREE of charge at official Aadhaar Seva Kendras.\nTrack enrolment status: https://uidai.gov.in/en/my-aadhaar/check-aadhaar-status.html",
+    "service": "aadhaar",
+    "state": "national",
+    "topic": "steps",
+    "source_url": "https://uidai.gov.in",
+    "source_name": "aadhaar.json"
+  },
+  {
+    "title": "Aadhaar Enrolment — Required Documents",
+    "text": "Aadhaar Enrolment — Required Documents\n\nProof of Identity (any one):\n- Passport\n- PAN card\n- Voter ID card\n- Driving licence\n- NREGA job card\n- Certificate of identity with photo issued by a Gazetted Officer or Tehsildar\n- Arms licence\n\nProof of Address (any one):\n- Passport\n- Bank / Post Office passbook with photo\n- Voter ID card\n- Ration card\n- Driving licence\n- Government-issued address certificate\n- Electricity bill / Water bill / Telephone bill (not older than 3 months)\n- Property tax receipt\n\nProof of Date of Birth (for DOB update):\n- Birth certificate\n- SSLC / Matriculation certificate\n- PAN card\n- Passport\n\nFor Head-of-Family (HoF) Based Enrolment (for family members without individual documents):\n- Aadhaar of the head of family is required\n- Relationship proof such as ration card, MNREGA job card, or marriage certificate\n\nFor Children below 5 years (Baal Aadhaar):\n- Birth certificate\n- Parent's or guardian's Aadhaar\n\nSource: https://uidai.gov.in",
+    "service": "aadhaar",
+    "state": "national",
+    "topic": "documents",
+    "source_url": "https://uidai.gov.in",
+    "source_name": "aadhaar.json"
+  },
+  {
+    "title": "Aadhaar Update — How to Update Your Aadhaar Details",
+    "text": "Aadhaar Update — How to Update Your Aadhaar Details\n\nUIDAI allows residents to update the following details in their Aadhaar:\n- Name (minor corrections allowed)\n- Date of birth (once in a lifetime only)\n- Gender\n- Address\n- Mobile number\n- Email address\n\nOnline Address Update:\n- Visit https://ssup.uidai.gov.in (Self Service Update Portal)\n- Log in using your Aadhaar number and registered mobile OTP\n- Upload a scanned copy of valid address proof\n- Pay a fee of Rs. 50 for demographic update\n\nMobile Number / Email Update:\n- Must be done at an Aadhaar Enrolment Centre or Aadhaar Seva Kendra as biometric authentication is required for mobile number updates.\n\nOffline Update:\n- Visit a nearby Aadhaar Enrolment Centre or Aadhaar Seva Kendra\n- Fill the Aadhaar Enrolment / Correction Form\n- Submit supporting documents\n- Fee: Rs. 50 per update request\n\nmAadhaar App:\n- Available on Android and iOS\n- Allows address update, profile management, and Aadhaar lock / unlock\n\nImportant: Demographic updates can be made a limited number of times. Verify all details carefully before submitting.\n\nSource: https://uidai.gov.in",
+    "service": "aadhaar",
+    "state": "national",
+    "topic": "fees",
+    "source_url": "https://ssup.uidai.gov.in",
+    "source_name": "aadhaar.json"
+  },
+  {
+    "title": "Aadhaar — Key Online Services and Frequently Asked Questions",
+    "text": "Aadhaar — Key Online Services and Frequently Asked Questions\n\nKey Online Services (available at uidai.gov.in):\n- Download e-Aadhaar (PDF): Free, password-protected with your name and birth year\n- Verify Aadhaar number\n- Lock / unlock biometric data (to prevent misuse)\n- Virtual ID (VID) generation — a 16-digit temporary ID to use instead of Aadhaar number\n- Check Aadhaar Authentication History\n- Order Aadhaar reprint (Rs. 50 + Rs. 25 postal charges)\n\nFrequently Asked Questions:\n\nQ: Is Aadhaar free to obtain?\nA: Yes. Aadhaar enrolment is completely free of charge at government-designated centres.\n\nQ: Can an NRI get Aadhaar?\nA: Non-Resident Indians (NRIs) with a valid Indian passport may apply.\n\nQ: My mobile number is not registered with Aadhaar. Can I still use online services?\nA: No. Many online UIDAI services require an OTP sent to the registered mobile number. Visit an enrolment centre to update your mobile number.\n\nQ: Is PAN-Aadhaar linking mandatory?\nA: Yes, for filing income tax returns. Check the Income Tax Department portal for the current deadline.\n\nQ: How do I lock my Aadhaar to prevent misuse?\nA: Log in to the UIDAI portal or mAadhaar app and use the Lock / Unlock Biometrics feature.\n\nHelpline: 1947 (toll-free, available in multiple languages)\nSource: https://uidai.gov.in",
+    "service": "aadhaar",
+    "state": "national",
+    "topic": "fees",
+    "source_url": "https://uidai.gov.in",
+    "source_name": "aadhaar.json"
+  }
+]
