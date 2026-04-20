@@ -108,6 +108,30 @@ $env:ENABLE_LOCAL_LLM_FALLBACK="true"
 
 Without `OPENAI_API_KEY`, the backend will use the rule-based fallback unless local fallback is explicitly enabled.
 
+## Voice API and Frontend
+
+This project now supports:
+
+- `POST /speech-to-text` — upload audio and receive a transcript.
+- `POST /text-to-speech` — synthesize response text as `audio/wav`.
+
+A frontend app was added under `frontend/` with:
+
+- Text input + mic button
+- File upload for audio transcription
+- Structured response rendering
+- Playback of generated TTS audio
+
+### Run the frontend locally
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+If you deploy the frontend to Vercel, set `VITE_API_BASE_URL` to your Render backend URL.
+
 ## Better Data Setup
 
 The retriever now supports metadata-rich chunk files shaped like:

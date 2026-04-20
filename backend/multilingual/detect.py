@@ -12,7 +12,6 @@ LANGUAGE_MAP = {
     "ml": "ml",
 }
 
-
 def detect_language(text: str) -> str:
     try:
         lang = detect(text)

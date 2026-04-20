@@ -18,7 +18,6 @@ HEADERS = {
     )
 }
 
-
 def clean_text(text: str) -> str:
     text = text.replace("\r", "")
     text = re.sub(r"\n{3,}", "\n\n", text)

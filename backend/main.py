@@ -1,8 +1,11 @@
 import json
-from typing import Any, Dict, List
+import tempfile
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from pydantic import BaseModel
 
 from backend.llm.generator import LLMGenerator
@@ -12,6 +15,7 @@ from backend.multilingual.detect import detect_language
 from backend.multilingual.translate import translate_from_english, translate_to_english
 from backend.rag.retriever import RAGRetriever
 from backend.safety.filter import SafetyFilter
+from backend.voice.voice import SpeechToText, TextToSpeech
 
 
 app = FastAPI(title="GovAssist Core Intelligence API")
@@ -26,10 +30,18 @@ app.add_middleware(
 retriever = RAGRetriever()
 generator = LLMGenerator()
 chat_memory = ChatMemory()
+speech_to_text_engine = SpeechToText()
+text_to_speech_engine = TextToSpeech()
 
 
 class ChatRequest(BaseModel):
     query: str
+
+
+class TextToSpeechRequest(BaseModel):
+    text: str
+    voice: Optional[str] = None
+    language: Optional[str] = "en"
 
 
 def build_empty_response(query: str, language: str, message: str = "") -> Dict[str, Any]:
@@ -143,3 +155,44 @@ def chat(request: ChatRequest) -> Dict[str, Any]:
         assistant_response=localized_response,
     )
     return localized_response
+
+
+@app.post("/speech-to-text")
+async def speech_to_text(file: UploadFile = File(...), language: Optional[str] = Form(None)) -> Dict[str, Any]:
+    if not file.content_type.startswith("audio/"):
+        raise HTTPException(status_code=400, detail="Audio file must be provided.")
+
+    suffix = Path(file.filename).suffix or ".wav"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+        tmp.write(await file.read())
+        audio_path = tmp.name
+
+    try:
+        result = speech_to_text_engine.transcribe(audio_path, language=language)
+        return {
+            "text": result.get("text", ""),
+            "language": result.get("language", language or "en"),
+            "error": result.get("error", ""),
+        }
+    finally:
+        try:
+            Path(audio_path).unlink()
+        except Exception:
+            pass
+
+
+@app.post("/text-to-speech")
+def text_to_speech(request: TextToSpeechRequest) -> Response:
+    if not request.text.strip():
+        raise HTTPException(status_code=400, detail="Text for synthesis must not be empty.")
+
+    result = text_to_speech_engine.synthesize(
+        text=request.text,
+        language=request.language or "en",
+        voice=request.voice,
+    )
+
+    if not result["audio"]:
+        raise HTTPException(status_code=503, detail=result.get("error", "Text-to-speech service unavailable."))
+
+    return Response(content=result["audio"], media_type="audio/wav")
