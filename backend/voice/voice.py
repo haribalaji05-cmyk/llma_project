@@ -1,5 +1,6 @@
 import io
 import os
+import tempfile
 from typing import Any, Dict, Optional
 
 try:
@@ -16,6 +17,11 @@ try:
     import soundfile as sf
 except ImportError:  # pragma: no cover
     sf = None
+
+try:
+    import pyttsx3
+except ImportError:  # pragma: no cover
+    pyttsx3 = None
 
 
 class SpeechToText:
@@ -62,6 +68,7 @@ class TextToSpeech:
     def __init__(self, model_name: str = None):
         self.model_name = model_name or os.getenv("TTS_MODEL", "tts_models/en/ljspeech/tacotron2-DDC")
         self.tts = None
+        self.pyttsx3_engine = None
         self.load_error = ""
 
         if TTS is None:
@@ -72,33 +79,57 @@ class TextToSpeech:
             except Exception as exc:
                 self.load_error = str(exc)
 
+        if self.tts is None and pyttsx3 is not None:
+            try:
+                self.pyttsx3_engine = pyttsx3.init()
+                self.pyttsx3_engine.setProperty("rate", 170)
+                self.load_error = ""
+            except Exception as exc:
+                if not self.load_error:
+                    self.load_error = str(exc)
+
     def synthesize(self, text: str, language: str = "en", voice: Optional[str] = None) -> Dict[str, Any]:
-        if self.tts is None:
+        if self.tts is None and self.pyttsx3_engine is None:
             return {"audio": b"", "sample_rate": 0, "error": self.load_error}
 
         if not text.strip():
             return {"audio": b"", "sample_rate": 0, "error": "Text cannot be empty."}
 
         try:
-            if voice:
-                audio = self.tts.tts(text, speaker=voice, language=language)
-            else:
-                audio = self.tts.tts(text, language=language)
+            if self.tts is not None:
+                if voice:
+                    audio = self.tts.tts(text, speaker=voice, language=language)
+                else:
+                    audio = self.tts.tts(text, language=language)
 
-            if isinstance(audio, tuple) and len(audio) == 2:
-                signal, sample_rate = audio
-            else:
-                signal = audio
-                sample_rate = getattr(self.tts.synthesizer, "output_sample_rate", 22050)
+                if isinstance(audio, tuple) and len(audio) == 2:
+                    signal, sample_rate = audio
+                else:
+                    signal = audio
+                    sample_rate = getattr(self.tts.synthesizer, "output_sample_rate", 22050)
 
-            out_buffer = io.BytesIO()
-            if sf is not None:
-                sf.write(out_buffer, signal, sample_rate, format="WAV")
-            else:
-                from scipy.io.wavfile import write as wav_write
+                out_buffer = io.BytesIO()
+                if sf is not None:
+                    sf.write(out_buffer, signal, sample_rate, format="WAV")
+                else:
+                    from scipy.io.wavfile import write as wav_write
 
-                wav_write(out_buffer, sample_rate, signal)
+                    wav_write(out_buffer, sample_rate, signal)
+                return {"audio": out_buffer.getvalue(), "sample_rate": sample_rate, "error": ""}
 
-            return {"audio": out_buffer.getvalue(), "sample_rate": sample_rate, "error": ""}
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
+                temp_path = tmp.name
+            try:
+                if voice:
+                    self.pyttsx3_engine.setProperty("voice", voice)
+                self.pyttsx3_engine.save_to_file(text, temp_path)
+                self.pyttsx3_engine.runAndWait()
+                audio_bytes = open(temp_path, "rb").read()
+                return {"audio": audio_bytes, "sample_rate": 22050, "error": ""}
+            finally:
+                try:
+                    os.remove(temp_path)
+                except Exception:
+                    pass
         except Exception as exc:
             return {"audio": b"", "sample_rate": 0, "error": str(exc)}

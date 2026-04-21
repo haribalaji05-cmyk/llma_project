@@ -10,3 +10,6 @@ requests==2.31.0
 numpy==1.26.4
 accelerate==1.0.1
 beautifulsoup4==4.12.3
+soundfile==0.12.1
+pyttsx3==2.98
+scipy==1.13.1

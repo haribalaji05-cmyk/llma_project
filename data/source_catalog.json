@@ -44,6 +44,18 @@
     ]
   },
   "states": {
+    "andhra_pradesh": [
+      {
+        "label": "AP Meeseva",
+        "url": "https://www.ap.meeseva.gov.in"
+      }
+    ],
+    "delhi": [
+      {
+        "label": "e-District Delhi",
+        "url": "https://edistrict.delhigovt.nic.in"
+      }
+    ],
     "karnataka": [
       {
         "label": "Seva Sindhu",
@@ -60,6 +72,18 @@
       {
         "label": "Aaple Sarkar",
         "url": "https://aaplesarkar.mahaonline.gov.in"
+      }
+    ],
+    "madhya_pradesh": [
+      {
+        "label": "MP eDistrict",
+        "url": "https://mpedistrict.gov.in"
+      }
+    ],
+    "punjab": [
+      {
+        "label": "eSewa Punjab",
+        "url": "https://esewa.punjab.gov.in"
       }
     ],
     "uttar_pradesh": [
@@ -108,6 +132,12 @@
       {
         "label": "eDistrict Odisha",
         "url": "https://edistrict.odisha.gov.in"
+      }
+    ],
+    "west_bengal": [
+      {
+        "label": "eDistrict West Bengal",
+        "url": "https://edistrict.wb.gov.in"
       }
     ]
   }

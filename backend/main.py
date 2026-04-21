@@ -90,6 +90,10 @@ def translate_response_fields(payload: Dict[str, Any], target_language: str) -> 
         translate_from_english(item, target_language)
         for item in answer.get("eligibility", [])
     ]
+    translated["answer"]["processing_time"] = translate_from_english(
+        answer.get("processing_time", ""),
+        target_language,
+    )
     translated["follow_up_questions"] = [
         translate_from_english(question, target_language)
         for question in payload.get("follow_up_questions", [])
@@ -99,6 +103,113 @@ def translate_response_fields(payload: Dict[str, Any], target_language: str) -> 
         target_language,
     )
     return translated
+
+
+def build_source_chunks(
+    retrieved_results: List[tuple[str, Dict[str, str]]],
+    fallback_chunks: List[str],
+) -> List[str]:
+    if not retrieved_results:
+        return fallback_chunks
+
+    formatted = []
+    for text, metadata in retrieved_results:
+        title = metadata.get("title", "").strip()
+        source_url = metadata.get("source_url", "").strip()
+        topic = metadata.get("topic", "").strip()
+        preview = " ".join(text.split())[:220].strip()
+        parts = [part for part in [title, topic, preview] if part]
+        line = " | ".join(parts)
+        if source_url:
+            line = f"{line} | Source: {source_url}" if line else f"Source: {source_url}"
+        if line:
+            formatted.append(line)
+    return formatted or fallback_chunks
+
+
+def build_low_confidence_response(
+    query: str,
+    language: str,
+    intent: str,
+    source_chunks: List[str],
+    official_links: List[str],
+) -> Dict[str, Any]:
+    return {
+        "query": query,
+        "intent": intent,
+        "language": language,
+        "answer": {
+            "title": "Not available",
+            "steps": [],
+            "documents": [],
+            "fees": "Not available",
+            "processing_time": "Not available",
+            "eligibility": [],
+            "official_links": official_links,
+        },
+        "follow_up_questions": [
+            "Can you mention the exact service name or state?",
+            "Do you want the official portal link instead?",
+        ],
+        "safety": {
+            "is_safe": True,
+            "message": "Limited matching official data was found for this query.",
+        },
+        "source_chunks": source_chunks,
+    }
+
+
+def assess_retrieval_confidence(
+    query: str,
+    service: str,
+    state: str,
+    retrieved_results: List[tuple[str, Dict[str, str]]],
+) -> Dict[str, Any]:
+    if not retrieved_results:
+        return {"is_confident": False, "official_links": [], "source_chunks": []}
+
+    query_lower = query.lower()
+    query_tokens = {
+        token
+        for token in query_lower.split()
+        if len(token) > 2 and token not in {"what", "how", "for", "the", "and", "fees", "fee"}
+    }
+
+    service_matches = 0
+    state_matches = 0
+    overlap_hits = 0
+    official_links = []
+    source_chunks = build_source_chunks(retrieved_results, [text for text, _ in retrieved_results])
+
+    for text, metadata in retrieved_results:
+        meta_service = metadata.get("service", "general")
+        meta_state = metadata.get("state", "national")
+        text_lower = text.lower()
+        if service == "general" or meta_service == service:
+            service_matches += 1
+        if state == "national" or meta_state in {state, "national"}:
+            state_matches += 1
+        if any(token in text_lower for token in query_tokens):
+            overlap_hits += 1
+        source_url = metadata.get("source_url", "").strip()
+        if source_url and source_url not in official_links:
+            official_links.append(source_url)
+
+    portal_keywords = ["tnesevai", "esevai", "seva sindhu", "aaple sarkar", "esathi", "meeseva", "portal"]
+    asks_for_portal = any(keyword in query_lower for keyword in portal_keywords)
+    if asks_for_portal and overlap_hits == 0:
+        return {
+            "is_confident": False,
+            "official_links": official_links,
+            "source_chunks": source_chunks,
+        }
+
+    is_confident = service_matches > 0 and state_matches > 0 and overlap_hits > 0
+    return {
+        "is_confident": is_confident,
+        "official_links": official_links,
+        "source_chunks": source_chunks,
+    }
 
 
 @app.get("/health")
@@ -125,12 +236,38 @@ def chat(request: ChatRequest) -> Dict[str, Any]:
     english_query = translate_to_english(original_query, source_lang=detected_language)
     detected_service = retriever.detect_service(english_query)
     detected_state = retriever.detect_state(english_query)
-    retrieved_chunks = retriever.retrieve(
+    retrieved_results = retriever.retrieve_with_metadata(
         english_query,
         top_k=3,
         service=detected_service,
         state=detected_state,
     )
+    retrieved_chunks = [text for text, _ in retrieved_results]
+    confidence = assess_retrieval_confidence(
+        query=english_query,
+        service=detected_service,
+        state=detected_state,
+        retrieved_results=retrieved_results,
+    )
+    print(
+        f"[RAG] service={detected_service} state={detected_state} "
+        f"results={len(retrieved_results)} confident={confidence['is_confident']}"
+    )
+    if not confidence["is_confident"]:
+        response = build_low_confidence_response(
+            query=original_query,
+            language=detected_language,
+            intent=detected_service if detected_service != "general" else "government_service_query",
+            source_chunks=confidence["source_chunks"],
+            official_links=confidence["official_links"],
+        )
+        localized_response = translate_response_fields(response, detected_language)
+        localized_response["query"] = original_query
+        localized_response["language"] = detected_language
+        localized_response["answer"]["official_links"] = response["answer"]["official_links"]
+        localized_response["source_chunks"] = response["source_chunks"]
+        return localized_response
+
     prompt = build_prompt(
         retrieved_context="\n\n".join(retrieved_chunks),
         user_query=english_query,
@@ -141,7 +278,7 @@ def chat(request: ChatRequest) -> Dict[str, Any]:
         payload=llm_payload,
         query=original_query,
         language=detected_language,
-        source_chunks=retrieved_chunks,
+        source_chunks=build_source_chunks(retrieved_results, retrieved_chunks),
     )
     response["safety"] = safety_result
     localized_response = translate_response_fields(response, detected_language)
@@ -193,6 +330,7 @@ def text_to_speech(request: TextToSpeechRequest) -> Response:
     )
 
     if not result["audio"]:
+        print(f"[TTS] Synthesis unavailable: {result.get('error', 'unknown error')}")
         raise HTTPException(status_code=503, detail=result.get("error", "Text-to-speech service unavailable."))
 
     return Response(content=result["audio"], media_type="audio/wav")

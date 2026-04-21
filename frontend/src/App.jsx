@@ -35,6 +35,9 @@ function App() {
     };
   }, [response]);
 
+  const hasItems = (value) => Array.isArray(value) && value.length > 0;
+  const hasText = (value) => Boolean(value && value !== "Not available");
+
   const fetchChat = async () => {
     if (!query.trim()) {
       setMessage("Please enter a question or use the mic to send audio.");
@@ -101,6 +104,14 @@ function App() {
         body: JSON.stringify({ text }),
       });
       if (!result.ok) {
+        const fallbackMessage = "Backend TTS unavailable. Using browser speech instead.";
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(utterance);
+          setMessage(fallbackMessage);
+          return;
+        }
         throw new Error(`TTS failed: ${result.statusText}`);
       }
       const blob = await result.blob();
@@ -217,54 +228,89 @@ function App() {
             </div>
             <div className="response-content">
               <h2>{response.answer.title}</h2>
-              <div className="answer-block">
-                <h3>Steps</h3>
-                <ol>
-                  {structuredAnswer.steps?.map((step, index) => (
-                    <li key={index}>{step}</li>
-                  ))}
-                </ol>
-              </div>
-              <div className="answer-block">
-                <h3>Documents</h3>
-                <ul>
-                  {structuredAnswer.documents?.map((doc, index) => (
-                    <li key={index}>{doc}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="answer-attributes">
-                <div>
-                  <strong>Fees:</strong> {structuredAnswer.fees}
+              {hasItems(structuredAnswer.steps) ? (
+                <div className="answer-block">
+                  <h3>Steps</h3>
+                  <ol>
+                    {structuredAnswer.steps?.map((step, index) => (
+                      <li key={index}>{step}</li>
+                    ))}
+                  </ol>
                 </div>
-                <div>
-                  <strong>Processing time:</strong> {structuredAnswer.processing_time}
+              ) : null}
+              {hasItems(structuredAnswer.documents) ? (
+                <div className="answer-block">
+                  <h3>Documents</h3>
+                  <ul>
+                    {structuredAnswer.documents?.map((doc, index) => (
+                      <li key={index}>{doc}</li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
+              ) : null}
+              {hasText(structuredAnswer.fees) || hasText(structuredAnswer.processing_time) ? (
+                <div className="answer-attributes">
+                  {hasText(structuredAnswer.fees) ? (
+                    <div>
+                      <strong>Fees:</strong> {structuredAnswer.fees}
+                    </div>
+                  ) : null}
+                  {hasText(structuredAnswer.processing_time) ? (
+                    <div>
+                      <strong>Processing time:</strong> {structuredAnswer.processing_time}
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+              {hasItems(structuredAnswer.eligibility) ? (
+                <div className="answer-block">
+                  <h3>Eligibility</h3>
+                  <ul>
+                    {structuredAnswer.eligibility?.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {hasItems(structuredAnswer.official_links) ? (
+                <div className="answer-block">
+                  <h3>Official Links</h3>
+                  <ul>
+                    {structuredAnswer.official_links?.map((link, index) => (
+                      <li key={index}>
+                        <a href={link} target="_blank" rel="noreferrer">
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {hasItems(response.follow_up_questions) ? (
+                <div className="answer-block">
+                  <h3>Follow-up Questions</h3>
+                  <ul>
+                    {response.follow_up_questions?.map((question, index) => (
+                      <li key={index}>{question}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
               <div className="answer-block">
-                <h3>Eligibility</h3>
+                <h3>Safety</h3>
+                <div>
+                  <strong>Safe:</strong> {response.safety?.is_safe ? "Yes" : "No"}
+                </div>
+                {response.safety?.message ? <div>{response.safety.message}</div> : null}
+              </div>
+              <details className="answer-block">
+                <summary>Source Chunks</summary>
                 <ul>
-                  {structuredAnswer.eligibility?.map((item, index) => (
-                    <li key={index}>{item}</li>
+                  {response.source_chunks?.map((chunk, index) => (
+                    <li key={index}>{chunk}</li>
                   ))}
                 </ul>
-              </div>
-              <div className="answer-block">
-                <h3>Official Links</h3>
-                <ul>
-                  {structuredAnswer.official_links?.map((link, index) => (
-                    <li key={index}>{link}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="answer-block">
-                <h3>Follow-up Questions</h3>
-                <ul>
-                  {response.follow_up_questions?.map((question, index) => (
-                    <li key={index}>{question}</li>
-                  ))}
-                </ul>
-              </div>
+              </details>
               <button onClick={handlePlayAnswerAudio} disabled={loading}>
                 Play Answer Audio
               </button>

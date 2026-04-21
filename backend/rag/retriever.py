@@ -191,6 +191,30 @@ class RAGRetriever:
                 candidates = scoped
         return candidates
 
+    def _rerank_candidates(
+        self,
+        query: str,
+        candidates: List[Dict[str, str]],
+        top_k: int,
+    ) -> List[Dict[str, str]]:
+        query_tokens = {
+            token
+            for token in re.findall(r"[a-zA-Z0-9]+", query.lower())
+            if len(token) > 2 and token not in {"what", "how", "for", "the", "and", "with"}
+        }
+
+        def score(item: Dict[str, str]) -> Tuple[int, int, int]:
+            text = item.get("text", "").lower()
+            title = item.get("title", "").lower()
+            topic = item.get("topic", "").lower()
+            overlap = sum(token in text for token in query_tokens)
+            title_boost = sum(token in title for token in query_tokens)
+            topic_boost = 1 if any(token in topic for token in query_tokens) else 0
+            return (overlap, title_boost, topic_boost)
+
+        ranked = sorted(candidates, key=score, reverse=True)
+        return ranked[:top_k]
+
     def retrieve(
         self,
         query: str,
@@ -208,7 +232,10 @@ class RAGRetriever:
             filtered_embeddings = self.embedder.embed_texts(filtered_documents)
             filtered_store.add_documents(filtered_documents, filtered_embeddings)
             query_embedding = self.embedder.embed_query(query)
-            return filtered_store.search(query_embedding, k=top_k)
+            initial_results = filtered_store.search(query_embedding, k=min(max(top_k * 2, 4), len(filtered_documents)))
+            rerank_pool = [item for item in candidates if item["text"] in initial_results]
+            reranked = self._rerank_candidates(query=query, candidates=rerank_pool or candidates, top_k=top_k)
+            return [item["text"] for item in reranked]
 
         query_embedding = self.embedder.embed_query(query)
         return self.vector_store.search(query_embedding, k=top_k)

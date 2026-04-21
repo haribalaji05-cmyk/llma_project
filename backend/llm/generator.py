@@ -251,8 +251,47 @@ class LLMGenerator:
 
     def _normalize_intent(self, value: Any, query: str, source_chunks: List[str]) -> str:
         text = str(value or "").strip().lower()
-        if text in {"passport_application", "aadhaar_service", "pf_withdrawal", "government_service_query"}:
+        exact_intents = {
+            "passport_application",
+            "passport_fees",
+            "passport_documents",
+            "passport_processing_time",
+            "aadhaar_service",
+            "aadhaar_enrolment",
+            "aadhaar_update",
+            "aadhaar_fees",
+            "pf_withdrawal",
+            "pf_uan_activation",
+            "pf_transfer",
+            "government_service_query",
+            "state_eservice_portal_usage",
+        }
+        if text in exact_intents:
             return text
+        if "passport" in text:
+            if "fee" in text or "cost" in text or "tatkal" in text:
+                return "passport_fees"
+            if "document" in text or "verification" in text:
+                return "passport_documents"
+            if "time" in text or "days" in text or "processing" in text:
+                return "passport_processing_time"
+            return "passport_application"
+        if "aadhaar" in text or "aadhar" in text or "uidai" in text:
+            if "update" in text:
+                return "aadhaar_update"
+            if "enrol" in text or "enroll" in text or "apply" in text:
+                return "aadhaar_enrolment"
+            if "fee" in text or "cost" in text:
+                return "aadhaar_fees"
+            return "aadhaar_service"
+        if "pf" in text or "epfo" in text or "uan" in text:
+            if "uan" in text:
+                return "pf_uan_activation"
+            if "transfer" in text:
+                return "pf_transfer"
+            return "pf_withdrawal"
+        if any(token in text for token in ["esevai", "seva", "sarkar", "portal", "esathi", "meeseva"]):
+            return "state_eservice_portal_usage"
         combined = f"{query}\n" + "\n".join(source_chunks[:2])
         return self._detect_intent(combined.lower(), combined.lower())
 
@@ -301,19 +340,46 @@ class LLMGenerator:
 
     def _detect_intent(self, query: str, context: str) -> str:
         combined = f"{query}\n{context}"
+        if any(token in combined for token in ["tnesevai", "e sevai", "esevai", "seva sindhu", "aaple sarkar", "esathi", "meeseva"]):
+            return "state_eservice_portal_usage"
         if "passport" in combined:
+            if any(token in combined for token in ["fee", "fees", "cost", "tatkal"]):
+                return "passport_fees"
+            if any(token in combined for token in ["document", "documents", "verification"]):
+                return "passport_documents"
+            if any(token in combined for token in ["time", "days", "processing"]):
+                return "passport_processing_time"
             return "passport_application"
         if "aadhaar" in combined or "aadhar" in combined or "uidai" in combined:
+            if "update" in combined:
+                return "aadhaar_update"
+            if any(token in combined for token in ["enrol", "enroll", "apply", "application"]):
+                return "aadhaar_enrolment"
+            if any(token in combined for token in ["fee", "fees", "cost"]):
+                return "aadhaar_fees"
             return "aadhaar_service"
         if "pf" in combined or "epfo" in combined or "uan" in combined:
+            if "uan" in combined:
+                return "pf_uan_activation"
+            if "transfer" in combined:
+                return "pf_transfer"
             return "pf_withdrawal"
         return "government_service_query"
 
     def _extract_title(self, intent: str, combined: str) -> str:
         title_map = {
             "passport_application": "Passport Application Process (India)",
+            "passport_fees": "Passport Fees",
+            "passport_documents": "Passport Required Documents",
+            "passport_processing_time": "Passport Processing Time",
             "aadhaar_service": "Aadhaar Service Information",
+            "aadhaar_enrolment": "Aadhaar Enrolment Process",
+            "aadhaar_update": "Aadhaar Update Process",
+            "aadhaar_fees": "Aadhaar Fees",
             "pf_withdrawal": "PF Withdrawal Process",
+            "pf_uan_activation": "UAN Activation Process",
+            "pf_transfer": "PF Transfer Process",
+            "state_eservice_portal_usage": "State e-Service Portal Information",
             "government_service_query": "Government Service Information",
         }
         for line in combined.splitlines():
@@ -409,17 +475,53 @@ class LLMGenerator:
                 "Do you want the Tatkal process details?",
                 "Do you need the required documents list?",
             ],
+            "passport_fees": [
+                "Do you want the Tatkal fee details?",
+                "Do you need the required documents for passport application?",
+            ],
+            "passport_documents": [
+                "Do you want the full passport application steps?",
+                "Do you want the official passport portal link?",
+            ],
+            "passport_processing_time": [
+                "Do you want the Tatkal processing timeline too?",
+                "Do you need passport tracking details?",
+            ],
             "aadhaar_service": [
                 "Do you want online or offline Aadhaar update steps?",
                 "Do you need the required documents?",
+            ],
+            "aadhaar_enrolment": [
+                "Do you need the Aadhaar enrolment documents?",
+                "Do you want the official UIDAI status tracking link?",
+            ],
+            "aadhaar_update": [
+                "Do you want online address update steps?",
+                "Do you need the Aadhaar update fee details?",
+            ],
+            "aadhaar_fees": [
+                "Do you want Aadhaar update fee details?",
+                "Do you need the Aadhaar update process?",
             ],
             "pf_withdrawal": [
                 "Do you need UAN and KYC requirements?",
                 "Do you want online EPFO claim steps?",
             ],
+            "pf_uan_activation": [
+                "Do you need the UAN activation steps?",
+                "Do you want KYC linking details too?",
+            ],
+            "pf_transfer": [
+                "Do you need the Form 13 transfer steps?",
+                "Do you want PF transfer eligibility details?",
+            ],
             "government_service_query": [
                 "Do you want required documents?",
                 "Do you want official links for this service?",
+            ],
+            "state_eservice_portal_usage": [
+                "Do you want portal registration steps?",
+                "Do you need the official portal link and service list?",
             ],
         }
         return follow_ups.get(intent, [])
@@ -456,14 +558,46 @@ class LLMGenerator:
             answer.get("official_links") or self._extract_links(combined)
         )[:5]
 
-        if "document" in query_lower or "verification" in query_lower:
+        if "document" in query_lower or "verification" in query_lower or intent.endswith("_documents"):
             answer["steps"] = []
-        elif any(token in query_lower for token in ["fee", "cost", "tatkal"]):
-            answer["documents"] = answer["documents"][:5]
-        elif any(token in query_lower for token in ["time", "days", "processing"]):
+            answer["fees"] = "Not available"
+            answer["processing_time"] = "Not available"
+        elif any(token in query_lower for token in ["fee", "fees", "cost", "tatkal"]) or intent.endswith("_fees"):
+            answer["steps"] = []
+            answer["documents"] = []
+            answer["eligibility"] = []
+            answer["processing_time"] = "Not available"
+            answer["fees"] = self._compress_fee_summary(answer["fees"])
+        elif any(token in query_lower for token in ["time", "days", "processing"]) or intent.endswith("_processing_time"):
             answer["steps"] = answer["steps"][:4]
+            answer["documents"] = []
+            answer["fees"] = "Not available"
+        elif any(token in query_lower for token in ["how", "apply", "process", "enrol", "enroll", "update"]) or intent in {"passport_application", "aadhaar_enrolment", "aadhaar_update", "pf_withdrawal", "pf_uan_activation", "pf_transfer"}:
+            answer["documents"] = answer["documents"][:5]
+            if len(answer["eligibility"]) > 3:
+                answer["eligibility"] = answer["eligibility"][:3]
+
+        if intent == "state_eservice_portal_usage":
+            answer["documents"] = answer["documents"][:5]
+            if not answer["official_links"]:
+                answer["official_links"] = self._extract_links(combined)
 
         if answer.get("title") == "Not available":
             answer["title"] = self._extract_title(intent, combined)
 
         return answer
+
+    def _compress_fee_summary(self, fee_text: str) -> str:
+        if not fee_text or fee_text == "Not available":
+            return "Not available"
+
+        lines = [line.strip(" -") for line in fee_text.splitlines() if line.strip()]
+        selected = []
+        for line in lines:
+            lower = line.lower()
+            if any(token in lower for token in ["fresh / renewal", "tatkal", "pcc", "reprint", "update fee", "free of charge"]):
+                selected.append(line)
+        selected = self._dedupe_preserve(selected)
+        if not selected:
+            return fee_text
+        return " | ".join(selected[:4])
