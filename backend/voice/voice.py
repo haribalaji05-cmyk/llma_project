@@ -1,6 +1,7 @@
 import io
 import os
 import tempfile
+from pathlib import Path
 from typing import Any, Dict, Optional
 
 try:
@@ -24,11 +25,41 @@ except ImportError:  # pragma: no cover
     pyttsx3 = None
 
 
+def configure_ffmpeg_path() -> str:
+    ffmpeg_env = os.getenv("FFMPEG_PATH", "").strip()
+    candidate_paths = [
+        ffmpeg_env,
+        r"C:\Users\harir\Downloads\ffmpeg-8.1-essentials_build\ffmpeg-8.1-essentials_build\bin\ffmpeg.exe",
+        r"C:\Users\harir\Downloads\ffmpeg-8.1-essentials_build\ffmpeg-8.1-essentials_build\bin",
+        r"C:\ffmpeg\bin\ffmpeg.exe",
+        r"C:\ffmpeg\bin",
+    ]
+
+    for candidate in candidate_paths:
+        if not candidate:
+            continue
+        candidate_path = Path(candidate)
+        if candidate_path.is_file() and candidate_path.name.lower() == "ffmpeg.exe":
+            ffmpeg_dir = str(candidate_path.parent)
+        elif candidate_path.is_dir():
+            ffmpeg_dir = str(candidate_path)
+        else:
+            continue
+
+        current_path = os.environ.get("PATH", "")
+        if ffmpeg_dir not in current_path.split(os.pathsep):
+            os.environ["PATH"] = f"{ffmpeg_dir}{os.pathsep}{current_path}" if current_path else ffmpeg_dir
+        return ffmpeg_dir
+
+    return ""
+
+
 class SpeechToText:
     def __init__(self, model_name: str = None):
         self.model_name = model_name or os.getenv("WHISPER_MODEL", "small")
         self.model = None
         self.load_error = ""
+        self.ffmpeg_dir = configure_ffmpeg_path()
 
         if whisper is None:
             self.load_error = "openai-whisper is not installed"
@@ -57,10 +88,15 @@ class SpeechToText:
                 "error": "",
             }
         except Exception as exc:
+            error_message = str(exc)
+            if "[WinError 2]" in error_message and not self.ffmpeg_dir:
+                error_message = (
+                    "ffmpeg was not found. Install ffmpeg or set FFMPEG_PATH to your ffmpeg.exe/bin folder."
+                )
             return {
                 "text": "",
                 "language": language or "en",
-                "error": str(exc),
+                "error": error_message,
             }
 
 

@@ -36,6 +36,7 @@ text_to_speech_engine = TextToSpeech()
 
 class ChatRequest(BaseModel):
     query: str
+    language: Optional[str] = None
 
 
 class TextToSpeechRequest(BaseModel):
@@ -163,6 +164,7 @@ def assess_retrieval_confidence(
     query: str,
     service: str,
     state: str,
+    topic: str,
     retrieved_results: List[tuple[str, Dict[str, str]]],
 ) -> Dict[str, Any]:
     if not retrieved_results:
@@ -178,17 +180,21 @@ def assess_retrieval_confidence(
     service_matches = 0
     state_matches = 0
     overlap_hits = 0
+    topic_matches = 0
     official_links = []
     source_chunks = build_source_chunks(retrieved_results, [text for text, _ in retrieved_results])
 
     for text, metadata in retrieved_results:
         meta_service = metadata.get("service", "general")
         meta_state = metadata.get("state", "national")
+        meta_topic = metadata.get("topic", "general")
         text_lower = text.lower()
         if service == "general" or meta_service == service:
             service_matches += 1
         if state == "national" or meta_state in {state, "national"}:
             state_matches += 1
+        if topic == "general" or meta_topic in {topic, "general", "steps"}:
+            topic_matches += 1
         if any(token in text_lower for token in query_tokens):
             overlap_hits += 1
         source_url = metadata.get("source_url", "").strip()
@@ -204,7 +210,7 @@ def assess_retrieval_confidence(
             "source_chunks": source_chunks,
         }
 
-    is_confident = service_matches > 0 and state_matches > 0 and overlap_hits > 0
+    is_confident = service_matches > 0 and state_matches > 0 and topic_matches > 0 and overlap_hits > 0
     return {
         "is_confident": is_confident,
         "official_links": official_links,
@@ -220,7 +226,8 @@ def health_check() -> Dict[str, str]:
 @app.post("/chat")
 def chat(request: ChatRequest) -> Dict[str, Any]:
     original_query = request.query.strip()
-    detected_language = detect_language(original_query or "en")
+    requested_language = (request.language or "").strip().lower()
+    detected_language = requested_language or detect_language(original_query or "en")
 
     if not original_query:
         response = build_empty_response("", detected_language, "Query cannot be empty.")
@@ -236,21 +243,24 @@ def chat(request: ChatRequest) -> Dict[str, Any]:
     english_query = translate_to_english(original_query, source_lang=detected_language)
     detected_service = retriever.detect_service(english_query)
     detected_state = retriever.detect_state(english_query)
+    detected_topic = retriever.detect_topic(english_query)
     retrieved_results = retriever.retrieve_with_metadata(
         english_query,
         top_k=3,
         service=detected_service,
         state=detected_state,
+        topic=detected_topic,
     )
     retrieved_chunks = [text for text, _ in retrieved_results]
     confidence = assess_retrieval_confidence(
         query=english_query,
         service=detected_service,
         state=detected_state,
+        topic=detected_topic,
         retrieved_results=retrieved_results,
     )
     print(
-        f"[RAG] service={detected_service} state={detected_state} "
+        f"[RAG] service={detected_service} state={detected_state} topic={detected_topic} "
         f"results={len(retrieved_results)} confident={confidence['is_confident']}"
     )
     if not confidence["is_confident"]:
@@ -289,7 +299,7 @@ def chat(request: ChatRequest) -> Dict[str, Any]:
 
     chat_memory.update(
         user_query=original_query,
-        assistant_response=localized_response,
+        assistant_response=response,
     )
     return localized_response
 
@@ -306,6 +316,8 @@ async def speech_to_text(file: UploadFile = File(...), language: Optional[str] =
 
     try:
         result = speech_to_text_engine.transcribe(audio_path, language=language)
+        if result.get("error"):
+            print(f"[STT] Transcription failed: {result['error']}")
         return {
             "text": result.get("text", ""),
             "language": result.get("language", language or "en"),

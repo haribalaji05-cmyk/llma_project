@@ -27,6 +27,7 @@ Use this exact format:
 Rules:
 - Use only the provided context.
 - If information is missing, write "Not available".
+- Write all answer text in English only.
 - Do not add any text before or after the JSON.
 
 Context:

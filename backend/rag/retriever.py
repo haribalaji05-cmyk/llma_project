@@ -179,7 +179,21 @@ class RAGRetriever:
                 return state
         return "national"
 
-    def _filter_metadata(self, service: str, state: str) -> List[Dict[str, str]]:
+    def detect_topic(self, query: str) -> str:
+        lowered = query.lower()
+        if any(keyword in lowered for keyword in ["document", "documents", "proof", "required"]):
+            return "documents"
+        if any(keyword in lowered for keyword in ["fee", "fees", "cost", "charge", "price"]):
+            return "fees"
+        if any(keyword in lowered for keyword in ["time", "timeline", "how long", "days", "processing"]):
+            return "processing_time"
+        if any(keyword in lowered for keyword in ["eligible", "eligibility", "who can", "requirement"]):
+            return "eligibility"
+        if any(keyword in lowered for keyword in ["portal", "register", "login", "use", "apply", "process", "steps"]):
+            return "steps"
+        return "general"
+
+    def _filter_metadata(self, service: str, state: str, topic: str = "general") -> List[Dict[str, str]]:
         candidates = self.metadata
         if service != "general":
             scoped = [item for item in candidates if item.get("service") == service]
@@ -189,6 +203,14 @@ class RAGRetriever:
             scoped = [item for item in candidates if item.get("state") in {state, "national"}]
             if scoped:
                 candidates = scoped
+        if topic != "general":
+            scoped = [
+                item
+                for item in candidates
+                if item.get("topic") == topic or (topic == "steps" and item.get("topic") == "general")
+            ]
+            if scoped:
+                candidates = scoped
         return candidates
 
     def _rerank_candidates(
@@ -196,6 +218,7 @@ class RAGRetriever:
         query: str,
         candidates: List[Dict[str, str]],
         top_k: int,
+        topic: str = "general",
     ) -> List[Dict[str, str]]:
         query_tokens = {
             token
@@ -203,17 +226,67 @@ class RAGRetriever:
             if len(token) > 2 and token not in {"what", "how", "for", "the", "and", "with"}
         }
 
-        def score(item: Dict[str, str]) -> Tuple[int, int, int]:
+        def score(item: Dict[str, str]) -> Tuple[int, int, int, int, int]:
             text = item.get("text", "").lower()
             title = item.get("title", "").lower()
             topic = item.get("topic", "").lower()
             overlap = sum(token in text for token in query_tokens)
             title_boost = sum(token in title for token in query_tokens)
-            topic_boost = 1 if any(token in topic for token in query_tokens) else 0
-            return (overlap, title_boost, topic_boost)
+            topic_boost = 2 if topic and topic == requested_topic else 0
+            title_phrase_boost = 1 if query.lower() in title else 0
+            source_boost = 1 if item.get("source_url") else 0
+            return (overlap, title_boost, topic_boost, title_phrase_boost, source_boost)
 
+        requested_topic = topic.lower()
         ranked = sorted(candidates, key=score, reverse=True)
         return ranked[:top_k]
+
+    def _select_context_bundle(
+        self,
+        query: str,
+        service: str,
+        state: str,
+        topic: str,
+        top_k: int,
+    ) -> List[Dict[str, str]]:
+        primary_pool = self._filter_metadata(service, state, topic)
+        fallback_pool = self._filter_metadata(service, state, "general")
+
+        combined_candidates = primary_pool or fallback_pool
+        if not combined_candidates:
+            return []
+
+        primary_ranked = self._rerank_candidates(
+            query=query,
+            candidates=combined_candidates,
+            top_k=min(max(top_k, 2), len(combined_candidates)),
+            topic=topic,
+        )
+
+        if topic == "general":
+            return primary_ranked[:top_k]
+
+        supplemental_candidates = [
+            item
+            for item in fallback_pool
+            if item not in primary_ranked and item.get("topic") in {"general", "steps", "eligibility", "faq"}
+        ]
+        supplemental_ranked = self._rerank_candidates(
+            query=query,
+            candidates=supplemental_candidates,
+            top_k=1,
+            topic="general",
+        )
+        bundled = primary_ranked[: max(top_k - len(supplemental_ranked), 1)] + supplemental_ranked
+
+        unique_bundle: List[Dict[str, str]] = []
+        seen = set()
+        for item in bundled:
+            key = item.get("text", "").strip().lower()
+            if key and key not in seen:
+                seen.add(key)
+                unique_bundle.append(item)
+        return unique_bundle[:top_k]
 
     def retrieve(
         self,
@@ -221,11 +294,12 @@ class RAGRetriever:
         top_k: int = 3,
         service: str = "general",
         state: str = "national",
+        topic: str = "general",
     ) -> List[str]:
         if not self.texts:
             return []
 
-        candidates = self._filter_metadata(service, state)
+        candidates = self._select_context_bundle(query, service, state, topic, top_k=max(top_k, 3))
         if candidates:
             filtered_documents = [item["text"] for item in candidates]
             filtered_store = FaissVectorStore(dimension=384)
@@ -234,7 +308,12 @@ class RAGRetriever:
             query_embedding = self.embedder.embed_query(query)
             initial_results = filtered_store.search(query_embedding, k=min(max(top_k * 2, 4), len(filtered_documents)))
             rerank_pool = [item for item in candidates if item["text"] in initial_results]
-            reranked = self._rerank_candidates(query=query, candidates=rerank_pool or candidates, top_k=top_k)
+            reranked = self._rerank_candidates(
+                query=query,
+                candidates=rerank_pool or candidates,
+                top_k=top_k,
+                topic=topic,
+            )
             return [item["text"] for item in reranked]
 
         query_embedding = self.embedder.embed_query(query)
@@ -246,8 +325,9 @@ class RAGRetriever:
         top_k: int = 3,
         service: str = "general",
         state: str = "national",
+        topic: str = "general",
     ) -> List[Tuple[str, Dict[str, str]]]:
-        texts = self.retrieve(query=query, top_k=top_k, service=service, state=state)
+        texts = self.retrieve(query=query, top_k=top_k, service=service, state=state, topic=topic)
         results: List[Tuple[str, Dict[str, str]]] = []
         for text in texts:
             for item in self.metadata:
