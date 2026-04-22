@@ -1,5 +1,6 @@
 import json
 import tempfile
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -160,6 +161,54 @@ def build_low_confidence_response(
     }
 
 
+def build_ambiguous_service_response(query: str, language: str) -> Dict[str, Any]:
+    return {
+        "query": query,
+        "intent": "government_service_query",
+        "language": language,
+        "answer": {
+            "title": "Not available",
+            "steps": [],
+            "documents": [],
+            "fees": "Not available",
+            "processing_time": "Not available",
+            "eligibility": [],
+            "official_links": [],
+        },
+        "follow_up_questions": [
+            "Which service do you mean: passport, Aadhaar, or PF?",
+            "Do you want eligibility for a specific government service?",
+        ],
+        "safety": {
+            "is_safe": True,
+            "message": "Your question is too broad to map to one service confidently.",
+        },
+        "source_chunks": [],
+    }
+
+
+def query_is_service_ambiguous(query: str, service: str, topic: str) -> bool:
+    if service != "general":
+        return False
+    query_lower = query.lower()
+    generic_phrases = [
+        "eligibility",
+        "eligibility criteria",
+        "what is the eligibility criteria",
+        "what are the eligibility criteria",
+        "documents required",
+        "what documents are needed",
+        "what is the fee",
+        "how much is the fee",
+        "processing time",
+        "how long does it take",
+    ]
+    if any(phrase in query_lower for phrase in generic_phrases):
+        return True
+    token_count = len(re.findall(r"[a-zA-Z0-9]+", query_lower))
+    return topic in {"documents", "fees", "processing_time", "eligibility"} and token_count <= 6
+
+
 def assess_retrieval_confidence(
     query: str,
     service: str,
@@ -173,8 +222,8 @@ def assess_retrieval_confidence(
     query_lower = query.lower()
     query_tokens = {
         token
-        for token in query_lower.split()
-        if len(token) > 2 and token not in {"what", "how", "for", "the", "and", "fees", "fee"}
+        for token in re.findall(r"[a-zA-Z0-9]+", query_lower)
+        if len(token) > 2 and token not in {"what", "how", "for", "the", "and", "fees", "fee", "with"}
     }
 
     service_matches = 0
@@ -240,10 +289,16 @@ def chat(request: ChatRequest) -> Dict[str, Any]:
         response["safety"] = safety_result
         return response
 
-    english_query = translate_to_english(original_query, source_lang=detected_language)
+    english_query = " ".join(translate_to_english(original_query, source_lang=detected_language).split())
     detected_service = retriever.detect_service(english_query)
     detected_state = retriever.detect_state(english_query)
     detected_topic = retriever.detect_topic(english_query)
+    if query_is_service_ambiguous(english_query, detected_service, detected_topic):
+        response = build_ambiguous_service_response(original_query, detected_language)
+        localized_response = translate_response_fields(response, detected_language)
+        localized_response["query"] = original_query
+        localized_response["language"] = detected_language
+        return localized_response
     retrieved_results = retriever.retrieve_with_metadata(
         english_query,
         top_k=3,
@@ -289,6 +344,7 @@ def chat(request: ChatRequest) -> Dict[str, Any]:
         query=original_query,
         language=detected_language,
         source_chunks=build_source_chunks(retrieved_results, retrieved_chunks),
+        raw_source_chunks=retrieved_chunks,
     )
     response["safety"] = safety_result
     localized_response = translate_response_fields(response, detected_language)

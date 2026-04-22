@@ -1,16 +1,14 @@
 Passport Application Process in India — Overview
 
-Passport services in India are managed by the Ministry of External Affairs through the Passport Seva Programme. 
-Citizens can apply for a fresh passport, renewal, or reissue of a lost or damaged passport. 
-Applications must be submitted through the official Passport Seva portal at passportindia.gov.in.
+Passport services in India are managed by the Ministry of External Affairs through the Passport Seva Programme. Citizens can apply for a fresh passport, renewal, or reissue of a lost or damaged passport. Applications must be submitted through the official Passport Seva portal at passportindia.gov.in.
 
-Step 1 — Register on the Passport Seva portal. Create an account using a valid email address and mobile number. 
-Step 2 — Fill the online application form (Form SP-1 for a normal passport or Form SP-2 for a diplomatic passport). 
-Step 3 — Pay the applicable fee online using net banking, debit card, or credit card. 
-Step 4 — Schedule an appointment at the nearest Passport Seva Kendra (PSK) or Post Office Passport Seva Kendra (POPSK). 
-Step 5 — Visit the PSK on the appointment date carrying originals and self-attested photocopies of all required documents. 
-Step 6 — Biometric data (photograph and fingerprints) will be collected at the PSK. 
-Step 7 — Application is forwarded to the Regional Passport Office (RPO) for police verification and final processing. 
+Step 1 — Register on the Passport Seva portal. Create an account using a valid email address and mobile number.
+Step 2 — Fill the online application form (Form SP-1 for a normal passport or Form SP-2 for a diplomatic passport).
+Step 3 — Pay the applicable fee online using net banking, debit card, or credit card.
+Step 4 — Schedule an appointment at the nearest Passport Seva Kendra (PSK) or Post Office Passport Seva Kendra (POPSK).
+Step 5 — Visit the PSK on the appointment date carrying originals and self-attested photocopies of all required documents.
+Step 6 — Biometric data (photograph and fingerprints) will be collected at the PSK.
+Step 7 — Application is forwarded to the Regional Passport Office (RPO) for police verification and final processing.
 Step 8 — Passport is dispatched to the registered address via Speed Post once approved.
 
 Official portal: https://www.passportindia.gov.in
@@ -54,29 +52,29 @@ For Government Employees:
 
 ================================================================================
 
-Passport Application — Fee Structure (Normal & Tatkal)
+Passport Application — Fee Structure (Normal and Tatkal)
 
-Normal Passport Fees (as of 2024, subject to change — verify on official portal):
+Normal Passport Fees (as of 2024 — verify on official portal before applying):
 
 36-page Passport (valid 10 years for adults, 5 years for minors below 18):
-- Fresh / Renewal:         ₹1,500
-- Lost / Damaged passport: ₹3,000
+- Fresh / Renewal: Rs. 1,500
+- Lost / Damaged passport: Rs. 3,000
 
 60-page Passport (valid 10 years):
-- Fresh / Renewal:         ₹2,000
-- Lost / Damaged passport: ₹3,500
+- Fresh / Renewal: Rs. 2,000
+- Lost / Damaged passport: Rs. 3,500
 
 For Minors (below 18 years):
-- Fresh / Renewal:         ₹1,000
+- Fresh / Renewal: Rs. 1,000
 
 Tatkal (Urgent) Additional Fee:
-- 36-page Tatkal:  ₹2,000 extra (Total ₹3,500)
-- 60-page Tatkal:  ₹2,000 extra (Total ₹4,000)
-- Lost/Damaged Tatkal: additional ₹2,000
+- 36-page Tatkal: Rs. 2,000 extra (Total Rs. 3,500)
+- 60-page Tatkal: Rs. 2,000 extra (Total Rs. 4,000)
+- Lost / Damaged Tatkal: additional Rs. 2,000
 
-Police Clearance Certificate (PCC): ₹500
+Police Clearance Certificate (PCC): Rs. 500
 
-Note: Fees can be paid online at the time of appointment booking. No cash is accepted at PSK counters. Fee once paid is non-refundable if the applicant is found ineligible. Please verify the latest fees on the official portal before applying: https://www.passportindia.gov.in
+Note: Fees can be paid online at the time of appointment booking. No cash is accepted at PSK counters. Fee once paid is non-refundable if the applicant is found ineligible. Always verify the latest fees on the official portal: https://www.passportindia.gov.in
 
 ================================================================================
 
@@ -90,14 +88,14 @@ Normal (Ordinary) Passport:
 Tatkal (Urgent) Passport:
 - Tatkal applications are processed within 1 to 3 working days at the PSK level.
 - Post-police verification, final dispatch generally takes 7 to 14 working days.
-- Tatkal requires the submission of additional supporting documents to justify urgency (e.g., medical emergency, employment abroad).
+- Tatkal requires submission of additional supporting documents to justify urgency (e.g., medical emergency, employment abroad).
 
-Tracking:
+Tracking Your Application:
 - Applicants can track passport status at: https://www.passportindia.gov.in
-- Track using the file reference number (FRN) received on the appointment receipt.
+- Track using the File Reference Number (FRN) received on the appointment receipt.
 - SMS alerts are sent at each stage to the registered mobile number.
 
-Helpline: 1800-258-1800 (toll-free, available Monday–Friday, 8 AM to 10 PM)
+Helpline: 1800-258-1800 (toll-free, available Monday to Friday, 8 AM to 10 PM)
 
 ================================================================================
 

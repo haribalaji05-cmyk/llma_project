@@ -147,7 +147,9 @@ class LLMGenerator:
         query: str,
         language: str,
         source_chunks: List[str],
+        raw_source_chunks: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
+        working_chunks = raw_source_chunks or source_chunks
         answer = payload.get("answer", {}) if isinstance(payload, dict) else {}
         safety_payload = payload.get("safety", {}) if isinstance(payload, dict) else {}
         normalized_intent = self._normalize_intent(payload.get("intent", "unknown"), query, source_chunks)
@@ -177,16 +179,16 @@ class LLMGenerator:
         }
 
         if "error" in payload:
-            normalized = self._build_fallback_response(normalized, query, source_chunks)
+            normalized = self._build_fallback_response(normalized, query, source_chunks, working_chunks)
             normalized["safety"]["message"] = ""
         elif self._answer_is_empty(normalized["answer"]):
-            normalized = self._build_fallback_response(normalized, query, source_chunks)
+            normalized = self._build_fallback_response(normalized, query, source_chunks, working_chunks)
 
         normalized["answer"] = self._postprocess_answer(
             normalized["answer"],
             query=query,
             intent=normalized["intent"],
-            source_chunks=normalized["source_chunks"],
+            source_chunks=working_chunks,
         )
         normalized["follow_up_questions"] = self._build_follow_ups(normalized["intent"])
         return normalized
@@ -311,8 +313,9 @@ class LLMGenerator:
         normalized: Dict[str, Any],
         query: str,
         source_chunks: List[str],
+        raw_source_chunks: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
-        extracted = self._extract_from_chunks(query, source_chunks)
+        extracted = self._extract_from_chunks(query, raw_source_chunks or source_chunks)
         normalized["intent"] = extracted["intent"]
         normalized["answer"] = extracted["answer"]
         normalized["follow_up_questions"] = extracted["follow_up_questions"]
@@ -401,18 +404,47 @@ class LLMGenerator:
     def _extract_documents(self, text: str) -> List[str]:
         documents = []
         capture = False
+        section_heading = ""
         for line in text.splitlines():
             clean = line.strip()
             lower = clean.lower()
-            if "required documents" in lower or "proof of" in lower:
+            if any(
+                token in lower
+                for token in [
+                    "required documents",
+                    "proof of identity",
+                    "proof of address",
+                    "proof of date of birth",
+                    "documents for",
+                    "supporting documents",
+                    "carry original documents",
+                ]
+            ):
                 capture = True
+                section_heading = re.sub(r"\s*\(.*?\)\s*:?$", "", clean).strip(": ")
                 continue
             if capture and not clean:
-                if documents:
-                    break
+                section_heading = ""
                 continue
             if capture and clean.startswith("-"):
-                documents.append(clean.lstrip("- ").strip())
+                item = clean.lstrip("- ").strip()
+                if item:
+                    documents.append(f"{section_heading}: {item}" if section_heading else item)
+                continue
+            if capture and re.match(r"^(for |proof of |accepted documents|supporting documents)", lower):
+                section_heading = re.sub(r"\s*\(.*?\)\s*:?$", "", clean).strip(": ")
+                continue
+            if capture and documents and clean and not clean.startswith("("):
+                capture = False
+                section_heading = ""
+        if not documents:
+            inline_matches = re.findall(
+                r"(identity proof|address proof|date of birth proof|supporting documents)",
+                text,
+                flags=re.IGNORECASE,
+            )
+            if inline_matches:
+                documents.extend(match.title() for match in inline_matches)
         return self._dedupe_preserve(documents)[:10]
 
     def _extract_fees(self, text: str) -> str:
@@ -562,6 +594,9 @@ class LLMGenerator:
             answer["steps"] = []
             answer["fees"] = "Not available"
             answer["processing_time"] = "Not available"
+            answer["eligibility"] = []
+            if not answer["documents"]:
+                answer["documents"] = ["Not available"]
         elif any(token in query_lower for token in ["fee", "fees", "cost", "tatkal"]) or intent.endswith("_fees"):
             answer["steps"] = []
             answer["documents"] = []

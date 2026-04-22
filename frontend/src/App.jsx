@@ -45,6 +45,10 @@ function App() {
 
   const hasItems = (value) => Array.isArray(value) && value.length > 0;
   const hasText = (value) => Boolean(value && value !== "Not available");
+  const expectsDocuments =
+    Boolean(response?.intent?.includes("document")) ||
+    /document/i.test(response?.answer?.title || "") ||
+    /enrolment|enrollment|verification/i.test(response?.answer?.title || "");
 
   const answerSummary = useMemo(() => {
     if (!response) return [];
@@ -361,16 +365,20 @@ function App() {
                 ) : null}
 
                 <div className="dual-grid">
-                  {hasItems(structuredAnswer.documents) ? (
+                  {hasItems(structuredAnswer.documents) || expectsDocuments ? (
                     <div className="content-card compact-card">
                       <div className="mini-header">
                         <h3>Documents</h3>
                       </div>
-                      <ul className="bullet-list">
-                        {structuredAnswer.documents.map((doc, index) => (
-                          <li key={index}>{doc}</li>
-                        ))}
-                      </ul>
+                      {hasItems(structuredAnswer.documents) ? (
+                        <ul className="bullet-list">
+                          {structuredAnswer.documents.map((doc, index) => (
+                            <li key={index}>{doc}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>Not available</p>
+                      )}
                     </div>
                   ) : null}
 

@@ -4,9 +4,23 @@
     "text": "Employees' Provident Fund (EPF) — Overview\n\nThe Employees' Provident Fund Organisation (EPFO) administers the Employees' Provident Fund (EPF), Employees' Pension Scheme (EPS), and Employees' Deposit Linked Insurance Scheme (EDLI) in India under the EPF and Miscellaneous Provisions Act, 1952.\n\nEPF applies to all establishments with 20 or more employees in specified industries. Both the employee and the employer contribute to the provident fund every month.\n\nContribution Rates:\n- Employee contribution: 12% of Basic Salary + Dearness Allowance (DA)\n- Employer contribution: 12% split as — 3.67% to EPF + 8.33% to EPS (capped at Rs. 1,250 per month)\n- Government contribution to EPS for employees earning up to Rs. 15,000 per month: 1.16%\n\nEach employee is issued a Universal Account Number (UAN) which remains the same throughout their career even when they change jobs.\n\nBenefits of EPF:\n- Tax-free interest on accumulated corpus (8.25% p.a. for 2023-24 — verify on epfindia.gov.in)\n- Pension (EPS) after 10 years of continuous service\n- Life insurance cover under EDLI (up to Rs. 7 lakh)\n- Partial withdrawal for medical, housing, education, and marriage needs\n\nOfficial portal: https://www.epfindia.gov.in\nMember portal: https://unifiedportal-mem.epfindia.gov.in\nHelpline: 1800-118-005 (toll-free)",
     "service": "pf",
     "state": "national",
-    "topic": "fees",
+    "topic": "steps",
+    "keywords": [
+      "epf",
+      "epfo",
+      "eps",
+      "fees",
+      "form 10c",
+      "form 19",
+      "form 31",
+      "pf",
+      "steps",
+      "uan",
+      "withdrawal"
+    ],
     "source_url": "https://www.epfindia.gov.in",
-    "source_name": "pf.json"
+    "source_name": "pf.json",
+    "last_updated": "2026-04-22"
   },
   {
     "title": "EPF — Universal Account Number (UAN) Activation and KYC",
@@ -14,34 +28,93 @@
     "service": "pf",
     "state": "national",
     "topic": "steps",
+    "keywords": [
+      "documents",
+      "epf",
+      "epfo",
+      "eps",
+      "form 10c",
+      "form 19",
+      "form 31",
+      "online",
+      "pf",
+      "steps",
+      "uan",
+      "update",
+      "withdrawal"
+    ],
     "source_url": "https://unifiedportal-mem.epfindia.gov.in",
-    "source_name": "pf.json"
+    "source_name": "pf.json",
+    "last_updated": "2026-04-22"
   },
   {
     "title": "EPF — Withdrawal Rules and Online Claim Process",
-    "text": "EPF — Withdrawal Rules and Online Claim Process\n\nTypes of EPF Withdrawals:\n\n1. Full Withdrawal (Final Settlement):\n   - Allowed after 2 months of unemployment (resignation, termination, retirement)\n   - At retirement (age 58)\n   - Claim forms: Form 19 (EPF) + Form 10C (EPS) + Form 31 (if applicable)\n\n2. Partial Withdrawal (Advance):\n   - Medical emergency: Up to 6 times monthly wages + DA or employee share with interest (no service limit)\n   - Marriage / Education: Up to 50% of employee's share (minimum 7 years service)\n   - Housing (purchase / construction): Up to 90% of EPF balance (minimum 5 years service)\n   - Home loan repayment: Up to 90% of EPF balance (minimum 10 years service)\n   - Claim form for advance: Form 31\n\nOnline Claim Filing (if UAN is Aadhaar-seeded and KYC complete):\n1. Log in to https://unifiedportal-mem.epfindia.gov.in\n2. Go to Online Services → Claim (Form-31, 19, 10C, 10D)\n3. Verify bank account details\n4. Select claim type and submit\n5. Claim is processed within 20 working days; amount is credited directly to the bank account\n\nClaim Tracking:\nSMS: EPFOHO UAN ENG to 7738299899\n\nSource: https://www.epfindia.gov.in",
+    "text": "EPF — Withdrawal Rules and Online Claim Process\n\nTypes of EPF Withdrawals:\n\n1. Full Withdrawal (Final Settlement):\n - Allowed after 2 months of unemployment (resignation, termination, retirement)\n - At retirement (age 58)\n - Claim forms: Form 19 (EPF) + Form 10C (EPS) + Form 31 (if applicable)\n\n2. Partial Withdrawal (Advance):\n - Medical emergency: Up to 6 times monthly wages + DA or employee share with interest (no service limit)\n - Marriage / Education: Up to 50% of employee's share (minimum 7 years service)\n - Housing (purchase / construction): Up to 90% of EPF balance (minimum 5 years service)\n - Home loan repayment: Up to 90% of EPF balance (minimum 10 years service)\n - Claim form for advance: Form 31\n\nOnline Claim Filing (if UAN is Aadhaar-seeded and KYC complete):\n1. Log in to https://unifiedportal-mem.epfindia.gov.in\n2. Go to Online Services → Claim (Form-31, 19, 10C, 10D)\n3. Verify bank account details\n4. Select claim type and submit\n5. Claim is processed within 20 working days; amount is credited directly to the bank account\n\nClaim Tracking:\nSMS: EPFOHO UAN ENG to 7738299899\n\nSource: https://www.epfindia.gov.in",
     "service": "pf",
     "state": "national",
-    "topic": "processing_time",
+    "topic": "steps",
+    "keywords": [
+      "epf",
+      "epfo",
+      "eps",
+      "form 10c",
+      "form 19",
+      "form 31",
+      "online",
+      "pf",
+      "steps",
+      "tracking",
+      "uan",
+      "withdrawal"
+    ],
     "source_url": "https://unifiedportal-mem.epfindia.gov.in",
-    "source_name": "pf.json"
+    "source_name": "pf.json",
+    "last_updated": "2026-04-22"
   },
   {
     "title": "EPF — PF Transfer Process When Changing Jobs",
     "text": "EPF — PF Transfer Process When Changing Jobs\n\nWhen an employee changes jobs, the EPF balance can be transferred from the old employer's PF account to the new employer's PF account using the UAN. This ensures continuous service (important for EPS pension eligibility).\n\nOnline PF Transfer (Form 13 online):\n1. Log in to EPFO Member portal: https://unifiedportal-mem.epfindia.gov.in\n2. Go to Online Services → One Member – One EPF Account (Transfer Request)\n3. Verify your personal details and previous member ID\n4. Select either previous employer or current employer to attest the claim\n5. Submit the transfer request online\n6. Track status on the portal\n\nImportant Points:\n- UAN must be active and KYC (Aadhaar + PAN + bank) must be verified by the employer\n- Previous member ID (PF account number with old employer) is required\n- Transfer request is processed within 20 working days once approved by the employer\n\nPension Transfer (EPS):\n- EPS balance is transferred automatically along with EPF transfer\n- Scheme Certificate is issued for service less than 10 years to preserve pension entitlement\n\nAvoiding Multiple PF Accounts:\n- Always provide UAN to every new employer to link the new PF account to the same UAN\n- Unlinked accounts can be merged using the EPFO composite claim form\n\nSource: https://www.epfindia.gov.in",
     "service": "pf",
     "state": "national",
-    "topic": "processing_time",
+    "topic": "steps",
+    "keywords": [
+      "epf",
+      "epfo",
+      "eps",
+      "form 10c",
+      "form 19",
+      "form 31",
+      "online",
+      "pf",
+      "steps",
+      "tracking",
+      "uan"
+    ],
     "source_url": "https://unifiedportal-mem.epfindia.gov.in",
-    "source_name": "pf.json"
+    "source_name": "pf.json",
+    "last_updated": "2026-04-22"
   },
   {
     "title": "EPF — Frequently Asked Questions (FAQs)",
-    "text": "EPF — Frequently Asked Questions (FAQs)\n\nQ: What is the current EPF interest rate?\nA: EPFO declares the interest rate annually. For 2023-24, it is 8.25% per annum. Check https://www.epfindia.gov.in for the latest declared rate.\n\nQ: Can I check my EPF balance without the UAN?\nA: Yes, using your member ID. But activating your UAN is recommended for full online access.\n\nQ: How do I check my EPF balance?\nA: Options include:\n   - EPFO Member portal: https://passbook.epfindia.gov.in\n   - SMS: EPFOHO UAN ENG to 7738299899\n   - Missed call: 011-22901406 (from registered mobile only)\n   - UMANG app\n\nQ: Is EPF withdrawal taxable?\nA: EPF withdrawal is tax-free if the member has completed 5 years of continuous service. Withdrawals before 5 years attract TDS (10% with PAN, 34.608% without PAN).\n\nQ: What happens to EPS if I leave before 10 years of service?\nA: You can withdraw the EPS amount using Form 10C, or obtain a Scheme Certificate to preserve the service record for future employment.\n\nQ: Can a self-employed person join EPF?\nA: No. EPF is for employees of covered establishments only. Self-employed individuals can consider PPF (Public Provident Fund) as an alternative.\n\nGrievance portal: https://epfigms.gov.in\nHelpline: 1800-118-005 (toll-free)\nSource: https://www.epfindia.gov.in",
+    "text": "EPF — Frequently Asked Questions (FAQs)\n\nQ: What is the current EPF interest rate?\nA: EPFO declares the interest rate annually. For 2023-24, it is 8.25% per annum. Check https://www.epfindia.gov.in for the latest declared rate.\n\nQ: Can I check my EPF balance without the UAN?\nA: Yes, using your member ID. But activating your UAN is recommended for full online access.\n\nQ: How do I check my EPF balance?\nA: Options include:\n - EPFO Member portal: https://passbook.epfindia.gov.in\n - SMS: EPFOHO UAN ENG to 7738299899\n - Missed call: 011-22901406 (from registered mobile only)\n - UMANG app\n\nQ: Is EPF withdrawal taxable?\nA: EPF withdrawal is tax-free if the member has completed 5 years of continuous service. Withdrawals before 5 years attract TDS (10% with PAN, 34.608% without PAN).\n\nQ: What happens to EPS if I leave before 10 years of service?\nA: You can withdraw the EPS amount using Form 10C, or obtain a Scheme Certificate to preserve the service record for future employment.\n\nQ: Can a self-employed person join EPF?\nA: No. EPF is for employees of covered establishments only. Self-employed individuals can consider PPF (Public Provident Fund) as an alternative.\n\nGrievance portal: https://epfigms.gov.in\nHelpline: 1800-118-005 (toll-free)\nSource: https://www.epfindia.gov.in",
     "service": "pf",
     "state": "national",
     "topic": "faq",
+    "keywords": [
+      "epf",
+      "epfo",
+      "eps",
+      "faq",
+      "form 10c",
+      "form 19",
+      "form 31",
+      "online",
+      "pf",
+      "uan",
+      "withdrawal"
+    ],
     "source_url": "https://www.epfindia.gov.in",
-    "source_name": "pf.json"
+    "source_name": "pf.json",
+    "last_updated": "2026-04-22"
   }
 ]

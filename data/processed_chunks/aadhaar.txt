@@ -1,601 +1,147 @@
-My Aadhaar
+Aadhaar — Overview and Importance
 
-Update Your Aadhaar
-Document update
-Check Aadhaar Update Status
-Update Demographics Data & Check Status
-Enrolment & Update Forms
-Aadhaar Enrolment & Update Charges
-Aadhaar Update History
-Update Aadhaar at Enrolment/Update Center
-Get Aadhaar
-Book an Appointment
-Check Aadhaar Status
-Download Aadhaar
-Order Aadhaar PVC Card
-Check Aadhaar PVC Card Status
-Locate an enrolment center in Bhuvan Aadhaar
-Aadhaar Enrolment & Update Charges
-Enrolment & Update Forms
-Aadhaar Services
-Verify an Aadhaar Number
-Verify Email/Mobile Number
-Retrieve Lost or Forgotten EID/UID
-Virtual ID (VID) Generator
-Aadhaar Paperless Offline e-kyc (Beta)
-Bank Seeding status
-Check Aadhaar validity
-Lock/Unlock Biometrics
-Aadhaar Authentication History
-Aadhaar Lock and Unlock Service
-Aadhaar Services on SMS
-Aadhaar Enrolment and Update Charges
-About your Aadhaar
-Features of Aadhaar
-Usage of Aadhaar
-Aadhaar Enrolment
-Aadhaar Generation
-Updating Data on Aadhaar
-Security in UIDAI system
-Aadhaar Myth Busters
-Aadhaar on your mobile
-Aadhaar App download
-Aadhaar App Videos
-Downloads
-Enrolment and Update Forms
-Aadhaar Enrolment and Update Charges
-Validity of downloaded Aadhaar (e-Aadhaar) as Proof of Identity Doc Type: PDF Size: 0.1MB
-New eAadhaar Doc Type: PDF Size:0.2 MB
-Handbooks Doc Type: PDF Size: 35MB
-List of Acceptable Document for Aadhaar Enrolment and Update Doc Type: PDF Size: 1.6MB
-Application by ANH for omission of Aadhaar Number on attaining the Age of 18 Years: PDF: 0.2MB
+Aadhaar is a 12-digit unique identification number issued by the Unique Identification Authority of India (UIDAI) to residents of India. It serves as proof of identity and proof of address for all Indian residents, regardless of age or gender.
 
-About UIDAI
+Aadhaar captures biometric data (fingerprints and iris scans) and demographic data (name, date of birth, gender, address, mobile number, and email). It is used for:
+- Direct Benefit Transfer (DBT) of subsidies and welfare benefits
+- Filing income tax returns
+- Opening bank accounts (via eKYC)
+- SIM card activation
+- Government scheme enrolment (ration card, MGNREGA, PM-KISAN, etc.)
+- PAN-Aadhaar linking (mandatory for income tax purposes)
 
-Unique Identification Authority of India
-Vision & Mission
-Composition of UIDAI Authority
-Organizational Structure
-Finance & Accounts
-Legal Framework
-Rules
-Notifications
-Regulations
-Circulars
-Judgements
-Updated Regulations
-Updated Rules
-Work with UIDAI
-Deputation/Contract
-Professional/Technical (NISG)
-Volunteers/Sabbatical
-Officers Served in the Past
-Tenders
-Internship in UIDAI
-Young Professional Hiring Policy
-Internship at UIDAI Tech. Center Bengaluru (2026)
-Right to Information
-UIDAI Citizens Charter
-Archives
-Aadhaar Dashboard
-POSH Policy and ICC at UIDAI
+Aadhaar is voluntary as per the Supreme Court of India judgment (2018), but is required for availing specific government benefits and subsidies. UIDAI is the statutory authority constituted under the Aadhaar Act, 2016.
 
-Ecosystem
+Official website: https://uidai.gov.in
+Helpline: 1947 (toll-free)
 
 ================================================================================
 
-UIDAI Ecosystem
-Enrolment Ecosystem
-Registrars
-Enrolment Agencies
-Aadhaar Seva Kendra
-Enrolment Documents
-Sanction Orders
-Aadhaar Saturation Report , PDF 0.448 MB
-Terms of Engagement (TOE)
-Authentication Ecosystem
-Operation Model
-Authentication Requesting Agency
-Authentication Service Agencies
-Authentication Devices & Documents
-Biometric Devices
-QR Code Reader
-About Aadhaar Paperless Offline e-kyc
-Developer Section
-Authentication Documents
-Training, Testing & Certification Ecosystem
-Training, Testing and Certification Policy 2023 Doc Type: PDF Size: 1.1MB
-SOP for training, testing and certification of E&U Operators
-SOP for Training, Testing and Certification of Authentication Operators Doc Type: PDF Size: 2 MB
-Corrigendum to Standard Operating Procedure (SOP) for training, testing and certification of Enrolment and Update (E&U) Operators. PDF,0.7 MB
-Annual Training Calendar 2024-25
-Annual Training Calendar 2025-26
-Annual Training Calendar 2026-27 (PDF, 5.4 MB)
+Aadhaar Enrolment — Step-by-Step Process
 
-Media & Resources
+Who can enrol: Any resident of India, including children (even newborns — Baal Aadhaar is issued with blue colour for children below 5 years).
 
-Media
-Aadhaar Broadcast
-Quote/Unquote
-Press Releases
-Resources
-Advertisements
-Photos
-Videos
-e-Calendar 2026
-Aadhaar on Vikaspedia
-UIDAI Documents
-Annual Reports
-Handbooks
-Compendium
-Parliament Questions.
-Brand Aadhaar
-Logo
-Aadhaar Mascot Brand Guidelines (PDF, 5.5 MB)
+Step 1 — Locate a nearby Aadhaar Enrolment Centre using the UIDAI website: https://uidai.gov.in or the mAadhaar app.
 
-Contact & Support
+Step 2 — Visit the enrolment centre without an appointment (walk-in). Carry original documents for identity proof and address proof.
 
-Have any Question?
-FAQs
-Glossary
-Aadhaar Usage-Dos and Dont's Doc Type:PDF Size:0.1MB
-Grievance Redressal Mechanism
-Grievance and Feedback
-Check Grievance / Feedback Status
-Right to Information
-Head Office (HO)
-Regional Offices
-File-Complaint
+Step 3 — Fill the Aadhaar Enrolment / Correction Form at the centre. Centre operators will assist.
+
+Step 4 — Submit biometric data:
+- Photograph
+- Ten fingerprints
+- Iris scan
+(Children below 5 years are exempt from biometrics; re-enrolment is required at age 5 and 15.)
+
+Step 5 — Receive an Acknowledgement Slip with a 14-digit Enrolment ID (EID). This is used for tracking status.
+
+Step 6 — Aadhaar is generated within 90 days and sent to the registered address via post. It can also be downloaded from the UIDAI portal using the EID.
+
+Enrolment is FREE of charge at official Aadhaar Seva Kendras.
+Track enrolment status: https://uidai.gov.in/en/my-aadhaar/check-aadhaar-status.html
 
 ================================================================================
 
-My Aadhaar
+Aadhaar Enrolment — Required Documents
 
-Update Your Aadhaar
-Document update
-Check Aadhaar Update Status
-Update Demographics Data & Check Status
-Enrolment & Update Forms
-Aadhaar Enrolment & Update Charges
-Aadhaar Update History
-Update Aadhaar at Enrolment/Update Center
-Get Aadhaar
-Book an Appointment
-Check Aadhaar Status
-Download Aadhaar
-Order Aadhaar PVC Card
-Check Aadhaar PVC Card Status
-Locate an enrolment center in Bhuvan Aadhaar
-Aadhaar Enrolment & Update Charges
-Enrolment & Update Forms
-Aadhaar Services
-Verify an Aadhaar Number
-Verify Email/Mobile Number
-Retrieve Lost or Forgotten EID/UID
-Virtual ID (VID) Generator
-Aadhaar Paperless Offline e-kyc (Beta)
-Bank Seeding status
-Check Aadhaar validity
-Lock/Unlock Biometrics
-Aadhaar Authentication History
-Aadhaar Lock and Unlock Service
-Aadhaar Services on SMS
-Aadhaar Enrolment and Update Charges
-About your Aadhaar
-Features of Aadhaar
-Usage of Aadhaar
-Aadhaar Enrolment
-Aadhaar Generation
-Updating Data on Aadhaar
-Security in UIDAI system
-Aadhaar Myth Busters
-Aadhaar on your mobile
-Aadhaar App download
-Aadhaar App Videos
-Downloads
-Enrolment and Update Forms
-Aadhaar Enrolment and Update Charges
-Validity of downloaded Aadhaar (e-Aadhaar) as Proof of Identity Doc Type: PDF Size: 0.1MB
-New eAadhaar Doc Type: PDF Size:0.2 MB
-Handbooks Doc Type: PDF Size: 35MB
-List of Acceptable Document for Aadhaar Enrolment and Update Doc Type: PDF Size: 1.6MB
-Application by ANH for omission of Aadhaar Number on attaining the Age of 18 Years: PDF: 0.2MB
+Proof of Identity (any one):
+- Passport
+- PAN card
+- Voter ID card
+- Driving licence
+- NREGA job card
+- Certificate of identity with photo issued by a Gazetted Officer or Tehsildar
+- Arms licence
 
-About UIDAI
+Proof of Address (any one):
+- Passport
+- Bank / Post Office passbook with photo
+- Voter ID card
+- Ration card
+- Driving licence
+- Government-issued address certificate
+- Electricity bill / Water bill / Telephone bill (not older than 3 months)
+- Property tax receipt
 
-Unique Identification Authority of India
-Vision & Mission
-Composition of UIDAI Authority
-Organizational Structure
-Finance & Accounts
-Legal Framework
-Rules
-Notifications
-Regulations
-Circulars
-Judgements
-Updated Regulations
-Updated Rules
-Work with UIDAI
-Deputation/Contract
-Professional/Technical (NISG)
-Volunteers/Sabbatical
-Officers Served in the Past
-Tenders
-Internship in UIDAI
-Young Professional Hiring Policy
-Internship at UIDAI Tech. Center Bengaluru (2026)
-Right to Information
-UIDAI Citizens Charter
-Archives
-Aadhaar Dashboard
-POSH Policy and ICC at UIDAI
+Proof of Date of Birth (for DOB update):
+- Birth certificate
+- SSLC / Matriculation certificate
+- PAN card
+- Passport
 
-Ecosystem
+For Head-of-Family (HoF) Based Enrolment (for family members without individual documents):
+- Aadhaar of the head of family is required
+- Relationship proof such as ration card, MNREGA job card, or marriage certificate
+
+For Children below 5 years (Baal Aadhaar):
+- Birth certificate
+- Parent's or guardian's Aadhaar
+
+Source: https://uidai.gov.in
 
 ================================================================================
 
-UIDAI Ecosystem
-Enrolment Ecosystem
-Registrars
-Enrolment Agencies
-Aadhaar Seva Kendra
-Enrolment Documents
-Sanction Orders
-Aadhaar Saturation Report , PDF 0.448 MB
-Terms of Engagement (TOE)
-Authentication Ecosystem
-Operation Model
-Authentication Requesting Agency
-Authentication Service Agencies
-Authentication Devices & Documents
-Biometric Devices
-QR Code Reader
-About Aadhaar Paperless Offline e-kyc
-Developer Section
-Authentication Documents
-Training, Testing & Certification Ecosystem
-Training, Testing and Certification Policy 2023 Doc Type: PDF Size: 1.1MB
-SOP for training, testing and certification of E&U Operators
-SOP for Training, Testing and Certification of Authentication Operators Doc Type: PDF Size: 2 MB
-Corrigendum to Standard Operating Procedure (SOP) for training, testing and certification of Enrolment and Update (E&U) Operators. PDF,0.7 MB
-Annual Training Calendar 2024-25
-Annual Training Calendar 2025-26
-Annual Training Calendar 2026-27 (PDF, 5.4 MB)
+Aadhaar Update — How to Update Your Aadhaar Details
 
-Media & Resources
+UIDAI allows residents to update the following details in their Aadhaar:
+- Name (minor corrections allowed)
+- Date of birth (once in a lifetime only)
+- Gender
+- Address
+- Mobile number
+- Email address
 
-Media
-Aadhaar Broadcast
-Quote/Unquote
-Press Releases
-Resources
-Advertisements
-Photos
-Videos
-e-Calendar 2026
-Aadhaar on Vikaspedia
-UIDAI Documents
-Annual Reports
-Handbooks
-Compendium
-Parliament Questions.
-Brand Aadhaar
-Logo
-Aadhaar Mascot Brand Guidelines (PDF, 5.5 MB)
+Online Address Update:
+- Visit https://ssup.uidai.gov.in (Self Service Update Portal)
+- Log in using your Aadhaar number and registered mobile OTP
+- Upload a scanned copy of valid address proof
+- Pay a fee of Rs. 50 for demographic update
 
-Contact & Support
+Mobile Number / Email Update:
+- Must be done at an Aadhaar Enrolment Centre or Aadhaar Seva Kendra as biometric authentication is required for mobile number updates.
 
-Have any Question?
-FAQs
-Glossary
-Aadhaar Usage-Dos and Dont's Doc Type:PDF Size:0.1MB
-Grievance Redressal Mechanism
-Grievance and Feedback
-Check Grievance / Feedback Status
-Right to Information
-Head Office (HO)
-Regional Offices
-File-Complaint
+Offline Update:
+- Visit a nearby Aadhaar Enrolment Centre or Aadhaar Seva Kendra
+- Fill the Aadhaar Enrolment / Correction Form
+- Submit supporting documents
+- Fee: Rs. 50 per update request
+
+mAadhaar App:
+- Available on Android and iOS
+- Allows address update, profile management, and Aadhaar lock / unlock
+
+Important: Demographic updates can be made a limited number of times. Verify all details carefully before submitting.
+
+Source: https://uidai.gov.in
 
 ================================================================================
 
-My Aadhaar
+Aadhaar — Key Online Services and Frequently Asked Questions
 
-Update Your Aadhaar
-Document update
-Check Aadhaar Update Status
-Update Demographics Data & Check Status
-Enrolment & Update Forms
-Aadhaar Enrolment & Update Charges
-Aadhaar Update History
-Update Aadhaar at Enrolment/Update Center
-Get Aadhaar
-Book an Appointment
-Check Aadhaar Status
-Download Aadhaar
-Order Aadhaar PVC Card
-Check Aadhaar PVC Card Status
-Locate an enrolment center in Bhuvan Aadhaar
-Aadhaar Enrolment & Update Charges
-Enrolment & Update Forms
-Aadhaar Services
-Verify an Aadhaar Number
-Verify Email/Mobile Number
-Retrieve Lost or Forgotten EID/UID
-Virtual ID (VID) Generator
-Aadhaar Paperless Offline e-kyc (Beta)
-Bank Seeding status
-Check Aadhaar validity
-Lock/Unlock Biometrics
-Aadhaar Authentication History
-Aadhaar Lock and Unlock Service
-Aadhaar Services on SMS
-Aadhaar Enrolment and Update Charges
-About your Aadhaar
-Features of Aadhaar
-Usage of Aadhaar
-Aadhaar Enrolment
-Aadhaar Generation
-Updating Data on Aadhaar
-Security in UIDAI system
-Aadhaar Myth Busters
-Aadhaar on your mobile
-Aadhaar App download
-Aadhaar App Videos
-Downloads
-Enrolment and Update Forms
-Aadhaar Enrolment and Update Charges
-Validity of downloaded Aadhaar (e-Aadhaar) as Proof of Identity Doc Type: PDF Size: 0.1MB
-New eAadhaar Doc Type: PDF Size:0.2 MB
-Handbooks Doc Type: PDF Size: 35MB
-List of Acceptable Document for Aadhaar Enrolment and Update Doc Type: PDF Size: 1.6MB
-Application by ANH for omission of Aadhaar Number on attaining the Age of 18 Years: PDF: 0.2MB
+Key Online Services (available at uidai.gov.in):
+- Download e-Aadhaar (PDF): Free, password-protected with your name and birth year
+- Verify Aadhaar number
+- Lock / unlock biometric data (to prevent misuse)
+- Virtual ID (VID) generation — a 16-digit temporary ID to use instead of Aadhaar number
+- Check Aadhaar Authentication History
+- Order Aadhaar reprint (Rs. 50 + Rs. 25 postal charges)
 
-About UIDAI
+Frequently Asked Questions:
 
-Unique Identification Authority of India
-Vision & Mission
-Composition of UIDAI Authority
-Organizational Structure
-Finance & Accounts
-Legal Framework
-Rules
-Notifications
-Regulations
-Circulars
-Judgements
-Updated Regulations
-Updated Rules
-Work with UIDAI
-Deputation/Contract
-Professional/Technical (NISG)
-Volunteers/Sabbatical
-Officers Served in the Past
-Tenders
-Internship in UIDAI
-Young Professional Hiring Policy
-Internship at UIDAI Tech. Center Bengaluru (2026)
-Right to Information
-UIDAI Citizens Charter
-Archives
-Aadhaar Dashboard
-POSH Policy and ICC at UIDAI
+Q: Is Aadhaar free to obtain?
+A: Yes. Aadhaar enrolment is completely free of charge at government-designated centres.
 
-Ecosystem
+Q: Can an NRI get Aadhaar?
+A: Non-Resident Indians (NRIs) with a valid Indian passport may apply.
 
-================================================================================
+Q: My mobile number is not registered with Aadhaar. Can I still use online services?
+A: No. Many online UIDAI services require an OTP sent to the registered mobile number. Visit an enrolment centre to update your mobile number.
 
-UIDAI Ecosystem
-Enrolment Ecosystem
-Registrars
-Enrolment Agencies
-Aadhaar Seva Kendra
-Enrolment Documents
-Sanction Orders
-Aadhaar Saturation Report , PDF 0.448 MB
-Terms of Engagement (TOE)
-Authentication Ecosystem
-Operation Model
-Authentication Requesting Agency
-Authentication Service Agencies
-Authentication Devices & Documents
-Biometric Devices
-QR Code Reader
-About Aadhaar Paperless Offline e-kyc
-Developer Section
-Authentication Documents
-Training, Testing & Certification Ecosystem
-Training, Testing and Certification Policy 2023 Doc Type: PDF Size: 1.1MB
-SOP for training, testing and certification of E&U Operators
-SOP for Training, Testing and Certification of Authentication Operators Doc Type: PDF Size: 2 MB
-Corrigendum to Standard Operating Procedure (SOP) for training, testing and certification of Enrolment and Update (E&U) Operators. PDF,0.7 MB
-Annual Training Calendar 2024-25
-Annual Training Calendar 2025-26
-Annual Training Calendar 2026-27 (PDF, 5.4 MB)
+Q: Is PAN-Aadhaar linking mandatory?
+A: Yes, for filing income tax returns. Check the Income Tax Department portal for the current deadline.
 
-Media & Resources
+Q: How do I lock my Aadhaar to prevent misuse?
+A: Log in to the UIDAI portal or mAadhaar app and use the Lock / Unlock Biometrics feature.
 
-Media
-Aadhaar Broadcast
-Quote/Unquote
-Press Releases
-Resources
-Advertisements
-Photos
-Videos
-e-Calendar 2026
-Aadhaar on Vikaspedia
-UIDAI Documents
-Annual Reports
-Handbooks
-Compendium
-Parliament Questions.
-Brand Aadhaar
-Logo
-Aadhaar Mascot Brand Guidelines (PDF, 5.5 MB)
-
-Contact & Support
-
-Have any Question?
-FAQs
-Glossary
-Aadhaar Usage-Dos and Dont's Doc Type:PDF Size:0.1MB
-Grievance Redressal Mechanism
-Grievance and Feedback
-Check Grievance / Feedback Status
-Right to Information
-Head Office (HO)
-Regional Offices
-File-Complaint
-
-================================================================================
-
-My Aadhaar
-
-Update Your Aadhaar
-Document update
-Check Aadhaar Update Status
-Update Demographics Data & Check Status
-Enrolment & Update Forms
-Aadhaar Enrolment & Update Charges
-Aadhaar Update History
-Update Aadhaar at Enrolment/Update Center
-Get Aadhaar
-Book an Appointment
-Check Aadhaar Status
-Download Aadhaar
-Order Aadhaar PVC Card
-Check Aadhaar PVC Card Status
-Locate an enrolment center in Bhuvan Aadhaar
-Aadhaar Enrolment & Update Charges
-Enrolment & Update Forms
-Aadhaar Services
-Verify an Aadhaar Number
-Verify Email/Mobile Number
-Retrieve Lost or Forgotten EID/UID
-Virtual ID (VID) Generator
-Aadhaar Paperless Offline e-kyc (Beta)
-Bank Seeding status
-Check Aadhaar validity
-Lock/Unlock Biometrics
-Aadhaar Authentication History
-Aadhaar Lock and Unlock Service
-Aadhaar Services on SMS
-Aadhaar Enrolment and Update Charges
-About your Aadhaar
-Features of Aadhaar
-Usage of Aadhaar
-Aadhaar Enrolment
-Aadhaar Generation
-Updating Data on Aadhaar
-Security in UIDAI system
-Aadhaar Myth Busters
-Aadhaar on your mobile
-Aadhaar App download
-Aadhaar App Videos
-Downloads
-Enrolment and Update Forms
-Aadhaar Enrolment and Update Charges
-Validity of downloaded Aadhaar (e-Aadhaar) as Proof of Identity Doc Type: PDF Size: 0.1MB
-New eAadhaar Doc Type: PDF Size:0.2 MB
-Handbooks Doc Type: PDF Size: 35MB
-List of Acceptable Document for Aadhaar Enrolment and Update Doc Type: PDF Size: 1.6MB
-Application by ANH for omission of Aadhaar Number on attaining the Age of 18 Years: PDF: 0.2MB
-
-About UIDAI
-
-Unique Identification Authority of India
-Vision & Mission
-Composition of UIDAI Authority
-Organizational Structure
-Finance & Accounts
-Legal Framework
-Rules
-Notifications
-Regulations
-Circulars
-Judgements
-Updated Regulations
-Updated Rules
-Work with UIDAI
-Deputation/Contract
-Professional/Technical (NISG)
-Volunteers/Sabbatical
-Officers Served in the Past
-Tenders
-Internship in UIDAI
-Young Professional Hiring Policy
-Internship at UIDAI Tech. Center Bengaluru (2026)
-Right to Information
-UIDAI Citizens Charter
-Archives
-Aadhaar Dashboard
-POSH Policy and ICC at UIDAI
-
-Ecosystem
-
-================================================================================
-
-UIDAI Ecosystem
-Enrolment Ecosystem
-Registrars
-Enrolment Agencies
-Aadhaar Seva Kendra
-Enrolment Documents
-Sanction Orders
-Aadhaar Saturation Report , PDF 0.448 MB
-Terms of Engagement (TOE)
-Authentication Ecosystem
-Operation Model
-Authentication Requesting Agency
-Authentication Service Agencies
-Authentication Devices & Documents
-Biometric Devices
-QR Code Reader
-About Aadhaar Paperless Offline e-kyc
-Developer Section
-Authentication Documents
-Training, Testing & Certification Ecosystem
-Training, Testing and Certification Policy 2023 Doc Type: PDF Size: 1.1MB
-SOP for training, testing and certification of E&U Operators
-SOP for Training, Testing and Certification of Authentication Operators Doc Type: PDF Size: 2 MB
-Corrigendum to Standard Operating Procedure (SOP) for training, testing and certification of Enrolment and Update (E&U) Operators. PDF,0.7 MB
-Annual Training Calendar 2024-25
-Annual Training Calendar 2025-26
-Annual Training Calendar 2026-27 (PDF, 5.4 MB)
-
-Media & Resources
-
-Media
-Aadhaar Broadcast
-Quote/Unquote
-Press Releases
-Resources
-Advertisements
-Photos
-Videos
-e-Calendar 2026
-Aadhaar on Vikaspedia
-UIDAI Documents
-Annual Reports
-Handbooks
-Compendium
-Parliament Questions.
-Brand Aadhaar
-Logo
-Aadhaar Mascot Brand Guidelines (PDF, 5.5 MB)
-
-Contact & Support
-
-Have any Question?
-FAQs
-Glossary
-Aadhaar Usage-Dos and Dont's Doc Type:PDF Size:0.1MB
-Grievance Redressal Mechanism
-Grievance and Feedback
-Check Grievance / Feedback Status
-Right to Information
-Head Office (HO)
-Regional Offices
-File-Complaint
+Helpline: 1947 (toll-free, available in multiple languages)
+Source: https://uidai.gov.in

@@ -37,6 +37,24 @@ class RAGRetriever:
         if documents:
             self.add_documents(documents)
 
+    def _repair_text(self, text: str) -> str:
+        replacements = {
+            "â€”": "—",
+            "â€“": "–",
+            "â†’": "→",
+            "â‚¹": "₹",
+            "â€™": "'",
+            "â€œ": '"',
+            "â€": '"',
+            "â€˜": "'",
+            "Â ": " ",
+            "Â": "",
+        }
+        fixed = str(text)
+        for broken, replacement in replacements.items():
+            fixed = fixed.replace(broken, replacement)
+        return fixed.strip()
+
     def _infer_service(self, path: Path, text: str) -> str:
         combined = f"{path.stem} {text[:400]}".lower()
         if "passport" in combined:
@@ -54,21 +72,43 @@ class RAGRetriever:
                 return state
         return "national"
 
-    def _infer_topic(self, text: str) -> str:
+    def _infer_topic(self, text: str, title: str = "") -> str:
+        title_lower = title.lower()
         lowered = text.lower()
-        if "required documents" in lowered or "proof of" in lowered:
+        if any(keyword in title_lower for keyword in ["overview", "step", "process", "procedure", "how to"]):
+            return "steps"
+        if any(keyword in title_lower for keyword in ["required documents", "documents", "proof of"]):
             return "documents"
-        if "fee" in lowered or "₹" in text or "rs." in lowered:
+        if any(keyword in title_lower for keyword in ["fee", "fees", "cost", "charges"]):
             return "fees"
+        if any(keyword in title_lower for keyword in ["processing time", "timeline", "timelines"]):
+            return "processing_time"
+        if "eligib" in title_lower:
+            return "eligibility"
+        if any(keyword in title_lower for keyword in ["faq", "frequently asked"]):
+            return "faq"
         if "processing time" in lowered or "working days" in lowered:
             return "processing_time"
+        if "fee" in lowered or "₹" in text or "rs." in lowered:
+            return "fees"
         if "step" in lowered or "process" in lowered:
             return "steps"
+        if "required documents" in lowered or "proof of" in lowered:
+            return "documents"
         if "eligib" in lowered:
             return "eligibility"
         if "faq" in lowered or "frequently asked" in lowered:
             return "faq"
         return "general"
+
+    def _resolve_topic(self, title: str, text: str, existing_topic: str = "") -> str:
+        inferred = self._infer_topic(text, title=title)
+        normalized_existing = existing_topic.strip().lower()
+        if not normalized_existing:
+            return inferred
+        if any(keyword in title.lower() for keyword in ["overview", "step", "process", "procedure"]) and normalized_existing in {"documents", "fees", "processing_time"}:
+            return "steps"
+        return normalized_existing
 
     def _extract_source_url(self, text: str) -> str:
         match = re.search(r"https?://[^\s)]+", text)
@@ -83,25 +123,33 @@ class RAGRetriever:
 
     def _normalize_entry(self, path: Path, item: object, index: int) -> Dict[str, str] | None:
         if isinstance(item, dict):
-            text = str(item.get("text", "")).strip()
+            text = self._repair_text(item.get("text", ""))
             if not text:
                 return None
             source_url = str(item.get("source_url", "")).strip() or self._extract_source_url(text)
-            title = str(item.get("title", "")).strip() or self._extract_title(text, path.stem)
+            title = self._repair_text(item.get("title", "")).strip() or self._extract_title(text, path.stem)
             service = str(item.get("service", "")).strip() or self._infer_service(path, text)
             state = str(item.get("state", "")).strip() or self._infer_state(path, text)
-            topic = str(item.get("topic", "")).strip() or self._infer_topic(text)
+            topic = self._resolve_topic(
+                title=title,
+                text=text,
+                existing_topic=str(item.get("topic", "")).strip(),
+            )
             source_name = str(item.get("source_name", "")).strip() or path.name
+            keywords = item.get("keywords", [])
+            if not isinstance(keywords, list):
+                keywords = []
         else:
-            text = str(item).strip()
+            text = self._repair_text(item)
             if not text:
                 return None
             source_url = self._extract_source_url(text)
             title = self._extract_title(text, f"{path.stem}-{index}")
             service = self._infer_service(path, text)
             state = self._infer_state(path, text)
-            topic = self._infer_topic(text)
+            topic = self._resolve_topic(title=title, text=text)
             source_name = path.name
+            keywords = []
 
         return {
             "text": text,
@@ -111,6 +159,7 @@ class RAGRetriever:
             "title": title,
             "source_url": source_url,
             "source_name": source_name,
+            "keywords": [str(keyword).strip().lower() for keyword in keywords if str(keyword).strip()],
         }
 
     def _split_text_chunks(self, text: str) -> List[str]:
@@ -226,16 +275,18 @@ class RAGRetriever:
             if len(token) > 2 and token not in {"what", "how", "for", "the", "and", "with"}
         }
 
-        def score(item: Dict[str, str]) -> Tuple[int, int, int, int, int]:
+        def score(item: Dict[str, str]) -> Tuple[int, int, int, int, int, int]:
             text = item.get("text", "").lower()
             title = item.get("title", "").lower()
             topic = item.get("topic", "").lower()
+            keywords = item.get("keywords", [])
             overlap = sum(token in text for token in query_tokens)
             title_boost = sum(token in title for token in query_tokens)
             topic_boost = 2 if topic and topic == requested_topic else 0
             title_phrase_boost = 1 if query.lower() in title else 0
             source_boost = 1 if item.get("source_url") else 0
-            return (overlap, title_boost, topic_boost, title_phrase_boost, source_boost)
+            keyword_boost = sum(token in keywords for token in query_tokens)
+            return (overlap, title_boost, topic_boost, title_phrase_boost, source_boost, keyword_boost)
 
         requested_topic = topic.lower()
         ranked = sorted(candidates, key=score, reverse=True)
